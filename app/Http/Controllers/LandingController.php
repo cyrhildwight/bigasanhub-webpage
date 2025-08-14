@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
+use App\Models\Franchise;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -30,6 +32,32 @@ class LandingController extends Controller
     {
         return view('contact');
     }
+
+    public function submitContact(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string',
+        ]);
+        Contact::create($validated);
+        return redirect()->route('contact')->with('success', 'Thank you for contacting us! We will get back to you soon.');
+    }
+
+    public function submitFranchise(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:15',
+            'message' => 'required|string',
+        ]);
+
+        $franchise = Franchise::create($validated);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Thank you for contacting us! We will get back to you soon.'
+        ]);
+    }
 }
-
-

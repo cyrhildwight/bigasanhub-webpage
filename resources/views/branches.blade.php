@@ -5,7 +5,7 @@
             <section class="py-[70px] bg-white bg-gradient-to-b from-green-100 to-[#e9f7ea]">
                 <div class="mx-auto w-[92%] max-w-[1200px]">
                     <h1 class="text-center text-3xl md:text-4xl font-extrabold text-green-900 m-0 mb-2">Branch Locator</h1>
-                    <p class="text-center m-0 mb-6 text-[#6b856f]">Find the nearest Bigasan Hub branch. Click a branch to view on Google Maps or get directions.</p>
+                    <p class="text-center m-0 mb-6 text-gray-700">Find the nearest Bigasan Hub branch. Click a branch to view on Google Maps or get directions.</p>
 
                     <div class="mb-4 flex gap-2">
                         <input id="branch-search" type="text" class="w-full px-3 py-3 border border-[#d8e6da] rounded-lg outline-none" placeholder="Search for a branch...">

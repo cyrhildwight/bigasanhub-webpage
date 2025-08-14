@@ -27,7 +27,6 @@
 					<a class="text-white font-semibold hover:text-green-200 hover:border-b-2 hover:border-green-200 pb-[2px]" href="{{ route('about') }}">About</a>
 					<a class="text-white font-semibold hover:text-green-200 hover:border-b-2 hover:border-green-200 pb-[2px]" href="{{ route('products') }}">Products</a>
 					<a class="text-white font-semibold hover:text-green-200 hover:border-b-2 hover:border-green-200 pb-[2px]" href="{{ route('branches') }}">Branch Locator</a>
-					<a class="text-white font-semibold hover:text-green-200 hover:border-b-2 hover:border-green-200 pb-[2px]" href="{{ route('contact') }}">Contact</a>
 				</nav>
 				<button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open main menu">
 					<svg id="icon-menu" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -40,7 +39,6 @@
 					<a class="text-white font-semibold py-2" href="{{ route('about') }}">About</a>
 					<a class="text-white font-semibold py-2" href="{{ route('products') }}">Products</a>
 					<a class="text-white font-semibold py-2" href="{{ route('branches') }}">Branch Locator</a>
-					<a class="text-white font-semibold py-2" href="{{ route('contact') }}">Contact</a>
 				</nav>
 			</div>
 		</header>
@@ -49,22 +47,27 @@
             @yield('content')
         </main>
 
-        <footer class="text-white py-7">
-            <div class="mx-auto w-[92%] max-w-[1200px] flex items-center justify-between">
-                <p class="m-0">© {{ date('Y') }} Bigasan Hub. All rights reserved.</p>
-                <div class="flex gap-2.5">
-                    <span class="w-9 h-9 grid place-items-center rounded-full bg-white/15" title="Facebook" aria-label="Facebook">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22 12.06C22 6.503 17.523 2 12 2S2 6.503 2 12.06c0 4.989 3.657 9.128 8.438 9.94v-7.03H7.898v-2.91h2.54v-2.22c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.196 2.238.196v2.47h-1.261c-1.243 0-1.63.774-1.63 1.567v1.877h2.773l-.443 2.91h-2.33V22C18.343 21.188 22 17.049 22 12.06Z"/></svg>
-                    </span>
-                    <span class="w-9 h-9 grid place-items-center rounded-full bg-white/15" title="Instagram" aria-label="Instagram">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.8A5.2 5.2 0 1 1 6.8 13 5.2 5.2 0 0 1 12 7.8Zm6.2-.8a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18.2 7Z"/></svg>
-                    </span>
-                    <a class="w-9 h-9 grid place-items-center rounded-full bg-white/15 text-white" href="mailto:info@bigasanhub.com" title="Email" aria-label="Email">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm8.06 8.94L20 8H4l7.94 4.94a1 1 0 0 0 1.12 0Z"/></svg>
-                    </a>
-                </div>
+        <a href="{{ route('contact') }}" class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#185a33] text-white font-bold shadow-lg hover:bg-[#134629] focus:outline-none focus:ring-2 focus:ring-white" aria-label="Contact Bigasan Hub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 5a3 3 0 0 1 3-3h2a1 1 0 0 1 1 1v3a1 1 0 0 1-.553.894l-1.447.724a10.97 10.97 0 0 0 4.382 4.382l.724-1.447A1 1 0 0 1 13 10h3a1 1 0 0 1 1 1v2a3 3 0 0 1-3 3h-1a11 11 0 0 1-11-11V5Z"/></svg>
+            <span>Contact Us</span>
+        </a>
+
+        <footer class="text-black py-8 bg-green-100">
+        <div class="mx-auto w-[92%] max-w-[1200px] flex flex-col items-center gap-3 text-center">
+            <div class="flex gap-3">
+                <a class="w-9 h-9 inline-flex items-center justify-center" href="https://www.facebook.com/people/Bigasan-Hub-PH/61573715723031/" title="Facebook" aria-label="Facebook" target="_blank" rel="noopener">
+                    <img src="/images/facebook.png" alt="Facebook" class="w-7 h-7 object-contain" />
+                </a>
+                <a class="w-9 h-9 inline-flex items-center justify-center" href="https://www.instagram.com/bigasan_hub/" title="Instagram" aria-label="Instagram" target="_blank" rel="noopener">
+                    <img src="/images/instagram.png" alt="Instagram" class="w-7 h-7 object-contain" />
+                </a>
+                <a class="w-9 h-9 inline-flex items-center justify-center" href="info@bigasanhub.com" title="Gmail" aria-label="Gmail" target="_blank" rel="noopener">
+                    <img src="/images/gmail.png" alt="Gmail" class="w-7 h-7 object-contain" />
+                </a>
             </div>
-        </footer>
+            <p class="m-0"><a href="https://bigasanhub.com" target="_blank" style="color: inherit; text-decoration: none;">© {{ date('Y') }} Bigasan Hub. All rights reserved.</a></p>
+        </div>
+    </footer>
     </body>
 </html>
 

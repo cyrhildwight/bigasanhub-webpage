@@ -57,6 +57,35 @@ if (header) {
       }
     });
   }
+
+  // Signup modal open
+        const signupOpenBtn = document.querySelector('[data-open-signup-modal]');
+        const signupModal = document.getElementById('signup-modal');
+        if (signupOpenBtn && signupModal) {
+            signupOpenBtn.addEventListener('click', () => {
+                signupModal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            });
+        }
+
+        // Signup modal close
+        document.addEventListener('click', (e) => {
+            const closeBackdrop = e.target.closest('[data-close-modal]');
+            const closeBtn = e.target.closest('button[data-close-modal]');
+            if ((closeBackdrop || closeBtn) && signupModal) {
+                signupModal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && signupModal && !signupModal.classList.contains('hidden')) {
+                signupModal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        });
+
+
   const toggleBtn = document.getElementById('mobile-menu-toggle');
   const menu = document.getElementById('mobile-menu');
   const iconMenu = document.getElementById('icon-menu');

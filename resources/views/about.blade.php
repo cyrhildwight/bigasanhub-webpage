@@ -2,7 +2,7 @@
 
 @section('content')
 <main>
-    <section class="py-[70px] bg-white bg-gradient-to-b from-green-100 to-[#e9f7ea]">
+    <section class="py-[70px] bg-white bg-gradient-to-b from-green-100 to-[#e9f7ea] fadein-top">
         <div class="mx-auto w-[92%] max-w-[1200px] grid items-center gap-9 md:[grid-template-columns:1.2fr_1fr]">
             <div>
                 <h1 class="text-center md:text-left text-3xl md:text-4xl font-extrabold text-green-900 m-0 mb-2">
@@ -19,17 +19,17 @@
 
     <section class="py-[70px] bg-white bg-gradient-to-b from-green-100/60 to-green-200/30 text-justify">
         <div class="mx-auto w-[92%] max-w-[1200px]">
-            <h2 class="text-center text-4xl font-extrabold text-green-900 m-0 mb-10">Vision, Mission & Core Values</h2>
+            <h2 class="text-center text-4xl font-extrabold text-green-900 m-0 mb-10 fadein-top">Vision, Mission & Core Values</h2>
             <div class="flex flex-col md:flex-row gap-6">
-                <article class="flex-1 bg-white rounded-2xl shadow-md border border-white/40 p-8">
+                <article class="flex-1 bg-white rounded-2xl shadow-md border border-white/40 p-8 fadein-left">
                     <h3 class="text-2xl font-extrabold text-green-900 m-0 mb-2">Vision</h3>
                     <p class="m-0 text-[#2d3d2a] leading-relaxed">To be the leading rice distribution hub in the Philippines, offering quality rice varieties through an extensive network of franchises and retail outlets.</p>
                 </article>
-                <article class="flex-1 bg-white rounded-2xl shadow-md border border-white/40 p-8">
+                <article class="flex-1 bg-white rounded-2xl shadow-md border border-white/40 p-8 fadein-top">
                     <h3 class="text-2xl font-extrabold text-green-900 m-0 mb-2">Mission</h3>
                     <p class="m-0 text-[#2d3d2a] leading-relaxed">To deliver quality rice at competitive prices, ensuring accessibility and affordability while promoting food security.</p>
                 </article>
-                <article class="flex-1 bg-white rounded-2xl shadow-md border border-white/40 p-8">
+                <article class="flex-1 bg-white rounded-2xl shadow-md border border-white/40 p-8 fadein-right">
                     <h3 class="text-2xl font-extrabold text-green-900 m-0 mb-2">Core Values</h3>
                     <ul class="m-0 mt-2 space-y-3">
                         <li class="flex text-start gap-3 text-[#2d3d2a]"><span class="mt-1 text-green-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -49,11 +49,11 @@
 
     <section class="py-[70px] bg-[#2f7a47]">
         <div class="mx-auto w-[92%] max-w-[1200px]">
-            <h2 class="text-center text-3xl md:text-4xl font-extrabold text-white m-0 mb-6">"BIGASAN HUB: Your Premier Rice Supplier for Quality & Afforable"</h2>
-            <div class="bg-white rounded-[14px] shadow-2xl p-6 md:p-8">
+            <h2 class="text-center text-3xl md:text-4xl font-extrabold text-white m-0 mb-6 fadein-top">"BIGASAN HUB: Your Premier Rice Supplier for Quality & Afforable"</h2>
+            <div class="bg-white rounded-[14px] shadow-2xl p-6 md:p-8 fadein-top">
                 <p class="m-0 mb-6 text-[#2d3d2a]">BIGASAN HUB offers a lucrative franchise model designed for aspiring entrepreneurs who want to enter the rice retail and wholesale business.</p>
                 <div class="grid md:grid-cols-2 gap-6">
-                    <div>
+                    <div class="fadein-left">
                         <h3 class="text-[#185a33] font-extrabold text-xl m-0 pb-2 border-b border-[#cfe9d2]">Our Franchise Packages Include:</h3>
                         <ul class="mt-4 space-y-4">
                             <li class="flex gap-3">
@@ -86,7 +86,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div>
+                    <div class="fadein-right">
                         <h3 class="text-[#185a33] font-extrabold text-xl m-0 pb-2 border-b border-[#cfe9d2]">Target Market</h3>
                         <ul class="mt-4 space-y-4">
                             <li class="flex gap-3">

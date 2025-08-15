@@ -28,11 +28,6 @@ class LandingController extends Controller
         return view('branches');
     }
 
-    public function contact()
-    {
-        return view('contact');
-    }
-
     public function submitContact(Request $request)
     {
         $validated = $request->validate([
@@ -41,7 +36,17 @@ class LandingController extends Controller
             'message' => 'required|string',
         ]);
         Contact::create($validated);
-        return redirect()->route('contact')->with('success', 'Thank you for contacting us! We will get back to you soon.');
+
+        // Check if it's an AJAX request
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Thank you for contacting us! We will get back to you soon.'
+            ]);
+        }
+
+        // For regular form submission, redirect
+        return redirect()->route('landing')->with('success', 'Thank you for contacting us! We will get back to you soon.');
     }
 
     public function submitFranchise(Request $request)
@@ -55,9 +60,15 @@ class LandingController extends Controller
 
         $franchise = Franchise::create($validated);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Thank you for contacting us! We will get back to you soon.'
-        ]);
+        // Check if it's an AJAX request
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Thank you for your franchise application! We will get back to you soon.'
+            ]);
+        }
+
+        // For regular form submission, redirect
+        return redirect()->route('landing')->with('success', 'Thank you for your franchise application! We will get back to you soon.');
     }
 }

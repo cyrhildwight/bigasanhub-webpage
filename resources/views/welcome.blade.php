@@ -117,39 +117,70 @@
             opacity: 0;
             animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInTop {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fadein-left, .fadein-right, .fadein-top {
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .fadein-left.visible {
+            opacity: 1;
+            animation: fadeInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .fadein-right.visible {
+            opacity: 1;
+            animation: fadeInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .fadein-top.visible {
+            opacity: 1;
+            animation: fadeInTop 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
     </style>
 </head>
 
 <body class="min-h-screen bg-[radial-gradient(1200px_600px_at_50%_-200px,#c8e6c9_0%,#a5d6a7_30%,#66bb6a_60%,#388e3c_100%)] bg-fixed text-[#0f2613]" style="font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;">
-    <header class="w-full bg-gradient-to-r from-gray-100 to-green-700">
-        <div class="w-full flex items-center justify-between py-2 px-6 md:px-12">
-            <div class="flex items-center gap-3">
-                <img class="h-14 w-auto block" alt="Bigasan Hub logo" src="images/logo.v2.png" />
+    @include('partials.header')
+
+    <!-- Success Message Display -->
+    @if(session('success'))
+        <div class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 p-4 rounded-lg bg-green-100 text-green-900 text-center font-semibold border border-green-300 shadow-lg transition-all duration-300">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- Custom Success Notification -->
+    <div id="successNotification" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-[100] max-w-md w-[92%] bg-white border border-green-200 rounded-2xl shadow-2xl transition-all duration-500 opacity-0 pointer-events-none overflow-hidden scale-95">
+        <div class="bg-gradient-to-r from-green-600 to-green-700 text-white text-center text-xs font-bold py-2">
+            <svg class="inline-block w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            Success!
+        </div>
+        <div class="p-4 text-center">
+            <div class="flex items-center justify-center mb-3">
+                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
             </div>
-            <nav class="hidden md:flex gap-[22px]">
-                <a class="text-white font-semibold hover:text-green-200 hover:border-b-2 hover:border-green-200 pb-[2px]" href="{{ route('landing') }}">Home</a>
-                <a class="text-white font-semibold hover:text-green-200 hover:border-b-2 hover:border-green-200 pb-[2px]" href="{{ route('about') }}">About</a>
-                <a class="text-white font-semibold hover:text-green-200 hover:border-b-2 hover:border-green-200 pb-[2px]" href="{{ route('products') }}">Products</a>
-                <a class="text-white font-semibold hover:text-green-200 hover:border-b-2 hover:border-green-200 pb-[2px]" href="{{ route('branches') }}">Branch Locator</a>
-            </nav>
-            <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open main menu">
-                <svg id="icon-menu" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-                <svg id="icon-close" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
+            <p id="successMessage" class="text-[#185a33] font-semibold text-sm leading-relaxed mb-3">Success!</p>
+            <div class="flex justify-center">
+                <div class="w-8 h-1 bg-green-200 rounded-full"></div>
+            </div>
         </div>
-        <div id="mobile-menu" class="md:hidden hidden border-t border-white/10 bg-[#185a33]">
-            <nav class="px-6 py-3 flex flex-col">
-                <a class="text-white font-semibold py-2" href="{{ route('landing') }}">Home</a>
-                <a class="text-white font-semibold py-2" href="{{ route('about') }}">About</a>
-                <a class="text-white font-semibold py-2" href="{{ route('products') }}">Products</a>
-                <a class="text-white font-semibold py-2" href="{{ route('branches') }}">Branch Locator</a>
-            </nav>
-        </div>
-    </header>
+    </div>
 
     <main id="home" class="w-full">
         <section class="relative overflow-hidden isolate rounded-none bg-gradient-to-b from-green-100 to-white h-[62vh] min-h-[440px]" aria-label="Hero">
@@ -159,7 +190,7 @@
             <div class="absolute inset-x-[6%] top-[12%] p-9 text-white z-10">
                 <h1 class="m-0 mb-2 text-4xl md:text-5xl lg:text-6xl font-extrabold fadeup-entrance" id="hero-title">Welcome to Bigasan Hub</h1>
                 <p class="m-0 mb-5 opacity-95 max-w-[65ch] leading-relaxed fadeup-entrance" id="hero-subtext" style="animation-delay:0.15s;">Premier rice supplier for households, restaurants, and retailers across the Philippines. Quality varieties, competitive pricing, and reliable wholesale and retail distribution.</p>
-                <a class="inline-block px-6 py-3 rounded-full bg-green-800 text-white font-bold shadow-lg hover:bg-green-600 transition fadeup-entrance" id="franchise-btn" style="animation-delay:0.3s;" href="#franchise-modal" data-open-franchise-modal>Franchise Now</a>
+                <button type="button" class="inline-block px-6 py-3 rounded-full bg-green-700 text-white font-bold shadow-lg hover:bg-green-600 transition fadeup-entrance" style="animation-delay:0.3s;" data-open-modal="franchise-modal-form">Franchise Now</button>
             </div>
         </section>
         <div class="relative -mt-[2px]" aria-hidden="true">
@@ -169,373 +200,69 @@
         </div>
 
         <!-- Franchise Modal -->
-        <div id="franchise-modal" class="fixed inset-0 z-[60] hidden">
-            <div class="absolute inset-0 bg-black/60" data-close-modal></div>
-            <div role="dialog" aria-modal="true" aria-labelledby="franchise-title" class="relative mx-auto my-10 max-w-[640px] w-[92%] bg-white rounded-2xl shadow-2xl overflow-hidden">
-                <button type="button" class="absolute top-3 right-3 p-2 rounded-full bg-white text-[#185a33] shadow hover:bg-green-50" data-close-modal aria-label="Close">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <div class="bg-gradient-to-r from-green-600 to-green-700 text-white text-center text-[11px] sm:text-xs font-bold py-2">
-                    Be part of the fastest growing franchising business today
-                </div>
-                <img src="/images/modal.jpg" alt="Bigasan Hub Franchise" class="w-full h-44 object-cover" />
-                <div class="p-6 sm:p-7 text-center">
-                    <h3 id="franchise-title" class="m-0 mb-2 text-xl sm:text-2xl font-extrabold text-[#185a33]">Start Your Bigasan Hub Business Today!</h3>
-                    <div class="text-3xl sm:text-4xl font-extrabold text-[#185a33] tracking-wide">PHP 79,990</div>
-                    <p class="m-0 mt-3 text-sm text-[#2d3d2a]">Own your rice retail and wholesale business. Join a fast-growing franchise network. Limited slots available.</p>
-                    <div class="mt-5 flex justify-center gap-3">
-                        <a href="{{ route('contact') }}" class="inline-block px-6 py-3 rounded-full bg-green-800 text-white font-bold shadow-lg hover:bg-green-600 transition">Inquire Now</a>
-                        <button class="inline-block px-6 py-3 rounded-full bg-blue-700 text-white font-bold shadow-lg hover:bg-blue-800 transition" data-open-signup-modal>Sign Up</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('partials.modals.franchise-modal')
 
-        <div id="signup-modal" class="fixed inset-0 z-[60] hidden">
-            <div class="absolute inset-0 bg-black/60" data-close-modal></div>
-            <div role="dialog" aria-modal="true" class="relative mx-auto my-10 max-w-[640px] w-[92%] bg-white rounded-2xl shadow-2xl overflow-hidden">
-                <button type="button" class="absolute top-3 right-3 p-2 rounded-full bg-white text-[#185a33] shadow hover:bg-green-50" data-close-modal aria-label="Close">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <div class="p-6">
-                    <h1 class="text-center text-3xl md:text-4xl font-extrabold text-green-900 mb-6">Franchise Sign Up</h1>
-                    <div id="franchiseAlert" class="mb-3"></div>
-                    <form id="franchiseForm" method="POST" action="{{ route('franchise.submit') }}" class="space-y-5">
-                        @csrf
-                        <div>
-                            <label class="block font-semibold mb-1 text-[#185a33]" for="name">Full Name</label>
-                            <input class="w-full px-4 py-3 border border-[#cfe9d2] rounded-lg outline-none focus:ring-2 focus:ring-green-300 transition" id="name" name="name" type="text" placeholder="Enter your full name" required>
-                        </div>
-                        <div>
-                            <label class="block font-semibold mb-1 text-[#185a33]" for="email">Email</label>
-                            <input class="w-full px-4 py-3 border border-[#cfe9d2] rounded-lg outline-none focus:ring-2 focus:ring-green-300 transition" id="email" name="email" type="email" placeholder="Enter your email" required>
-                        </div>
-                        <div>
-                            <label class="block font-semibold mb-1 text-[#185a33]" for="phone">Phone Number</label>
-                            <input class="w-full px-4 py-3 border border-[#cfe9d2] rounded-lg outline-none focus:ring-2 focus:ring-green-300 transition" id="phone" name="phone" type="text" placeholder="Enter your phone number" required>
-                        </div>
-                        <div>
-                            <label class="block font-semibold mb-1 text-[#185a33]" for="message">Message</label>
-                            <textarea class="w-full px-4 py-3 border border-[#cfe9d2] rounded-lg outline-none min-h-[120px] resize-y focus:ring-2 focus:ring-green-300 transition" id="message" name="message" placeholder="Tell us about your interest in franchising..." required></textarea>
-                        </div>
-                        <button type="submit" id="franchiseSubmitBtn" class="w-full px-5 py-3 rounded-full bg-green-700 text-white font-bold shadow-lg hover:bg-green-800 transition text-lg flex items-center justify-center">
-                            <span id="btnText">Submit Application</span>
-                            <svg id="btnLoader" class="hidden animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
+        @include('partials.modals.signup-modal')
+        @include('partials.modals.contact-modal')
     </main>
 
-    <!-- New home-only content -->
-    <section class="py-[70px] bg-green-100">
-        <div class="mx-auto w-[92%] max-w-[1200px]">
-            <h2 class="text-center text-3xl md:text-4xl font-extrabold text-green-900 m-0 mb-2">
-                Why choose Bigasan Hub
-            </h2>
-            <p class="text-center m-0 mb-9 text-gray-700 max-w-[70ch] mx-auto">
-                Reliable sourcing, fair pricing, and a service-first team focused on your household or business needs.
-            </p>
+    @include('partials.sections.why-choose')
+    @include('partials.sections.featured-varieties')
+    @include('partials.sections.marquee')
+    @include('partials.sections.explore-more')
+    @include('partials.sections.contact')
+    @include('partials.sections.faq')
 
-            <div class="grid gap-6 md:grid-cols-3">
-
-                <!-- Consistent Quality -->
-                <article class="bg-white rounded-[14px] shadow-md border border-[#e7efe8] p-6 hover:border-green-700 hover:bg-green-80 hover:shadow-green-700 transition">
-                    <div class="flex items-center gap-3 mb-2 text-green-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 14.59l-3.29-3.3 1.42-1.41 1.87 1.88 3.88-3.88 1.41 1.41L13 16.59z" />
-                        </svg>
-                        <h3 class="m-0 text-xl text-[#185a33] font-extrabold">Consistent Quality</h3>
-                    </div>
-                    <p class="m-0 text-[#2d3d2a]">We partner with trusted mills to ensure every sack meets our standard.</p>
-                </article>
-
-                <!-- Fair, Transparent Prices -->
-                <article class="bg-white rounded-[14px] shadow-md border border-[#e7efe8] p-6 hover:border-green-700 hover:bg-green-80 hover:shadow-green-700 transition">
-                    <div class="flex items-center gap-3 mb-2 text-green-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 1l3 7h7l-5.5 4 2 7L12 16l-6.5 3 2-7L2 8h7z" />
-                        </svg>
-                        <h3 class="m-0 text-xl text-[#185a33] font-extrabold">Fair, Transparent Prices</h3>
-                    </div>
-                    <p class="m-0 text-[#2d3d2a]">Retail or wholesale, you get competitive pricing with no surprises.</p>
-                </article>
-
-                <!-- Service You Can Trust -->
-                <article class="bg-white rounded-[14px] shadow-md border border-[#e7efe8] p-6 hover:border-green-700 hover:bg-green-80 hover:shadow-green-700 transition">
-                    <div class="flex items-center gap-3 mb-2 text-green-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm-7 9a7 7 0 0114 0H5z" />
-                        </svg>
-                        <h3 class="m-0 text-xl text-[#185a33] font-extrabold">Service You Can Trust</h3>
-                    </div>
-                    <p class="m-0 text-[#2d3d2a]">A friendly team ready to support households, stores, and food businesses.</p>
-                </article>
-
-            </div>
-        </div>
-    </section>
-
-
-
-    <section class="py-[70px] bg-green-100">
-        <div class="mx-auto w-[92%] max-w-[1200px]">
-            <h2 class="text-center text-3xl md:text-4xl font-extrabold text-green-900 m-0 mb-2">Featured Varieties</h2>
-            <p class="text-center m-0 mb-9 text-gray-700 max-w-[70ch] mx-auto">
-                Our most requested rice for homes and food businesses.
-            </p>
-            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-
-                <article class="group bg-white rounded-[14px] shadow-md border border-[#e7efe8] overflow-hidden hover:border-green-700 hover:bg-green-80 hover:shadow-green-700 transition">
-                    <div class="aspect-[4/3] bg-green-50 grid place-items-center">
-                        <img src="images/dinorado.png" alt="Dinorado rice" class="max-h-[150px] w-auto transition-transform duration-300 group-hover:scale-105" />
-                    </div>
-                    <div class="p-5">
-                        <h3 class="m-0 mb-1 text-lg text-[#185a33] font-extrabold">Dinorado</h3>
-                        <p class="m-0 text-sm text-[#2d3d2a] mb-3">Fragrant, soft grain—perfect for everyday meals.</p>
-                        <a href="{{ route('products') }}" class="inline-block text-sm font-semibold text-green-800 hover:text-green-900">View details →</a>
-                    </div>
-                </article>
-
-                <article class="group bg-white rounded-[14px] shadow-md border border-[#e7efe8] overflow-hidden hover:border-green-700 hover:bg-green-80 hover:shadow-green-700 transition">
-                    <div class="aspect-[4/3] bg-green-50 grid place-items-center">
-                        <img src="images/hasmin.png" alt="Hasmin rice" class="max-h-[150px] w-auto transition-transform duration-300 group-hover:scale-105" />
-                    </div>
-                    <div class="p-5">
-                        <h3 class="m-0 mb-1 text-lg text-[#185a33] font-extrabold">Hasmin</h3>
-                        <p class="m-0 text-sm text-[#2d3d2a] mb-3">Premium aroma and texture for special occasions.</p>
-                        <a href="{{ route('products') }}" class="inline-block text-sm font-semibold text-green-800 hover:text-green-900">View details →</a>
-                    </div>
-                </article>
-
-                <article class="group bg-white rounded-[14px] shadow-md border border-[#e7efe8] overflow-hidden hover:border-green-700 hover:bg-green-80 hover:shadow-green-700 transition">
-                    <div class="aspect-[4/3] bg-green-50 grid place-items-center">
-                        <img src="images/ivory.png" alt="Ivory rice" class="max-h-[150px] w-auto transition-transform duration-300 group-hover:scale-105" />
-                    </div>
-                    <div class="p-5">
-                        <h3 class="m-0 mb-1 text-lg text-[#185a33] font-extrabold">Ivory</h3>
-                        <p class="m-0 text-sm text-[#2d3d2a] mb-3">Clean and reliable quality, great for families.</p>
-                        <a href="{{ route('products') }}" class="inline-block text-sm font-semibold text-green-800 hover:text-green-900">View details →</a>
-                    </div>
-                </article>
-
-                <article class="group bg-white rounded-[14px] shadow-md border border-[#e7efe8] overflow-hidden hover:border-green-700 hover:bg-green-80 hover:shadow-green-700 transition">
-                    <div class="aspect-[4/3] bg-green-50 grid place-items-center">
-                        <img src="images/prima.png" alt="Prima rice" class="max-h-[150px] w-auto transition-transform duration-300 group-hover:scale-105" />
-                    </div>
-                    <div class="p-5">
-                        <h3 class="m-0 mb-1 text-lg text-[#185a33] font-extrabold">Prima</h3>
-                        <p class="m-0 text-sm text-[#2d3d2a] mb-3">Balanced choice for taste and value.</p>
-                        <a href="{{ route('products') }}" class="inline-block text-sm font-semibold text-green-800 hover:text-green-900">View details →</a>
-                    </div>
-                </article>
-
-            </div>
-        </div>
-    </section>
-
-
-    <section class="py-10 bg-green-100">
-        <div class="mx-auto w-[92%] max-w-[1500px]">
-            <div class="marquee">
-                <div class="marquee-track" id="marquee-track">
-                    <img src="images/dinorado.png" alt="Dinorado" class="h-25 w-auto opacity-90" />
-                    <img src="images/hasmin.png" alt="Hasmin" class="h-25 w-auto opacity-90" />
-                    <img src="images/ivory.png" alt="Ivory" class="h-25 w-auto opacity-90" />
-                    <img src="images/prima.png" alt="Prima" class="h-25 w-auto opacity-90" />
-                    <img src="images/dinorado.png" alt="Dinorado" class="h-25 w-auto opacity-90" />
-                    <img src="images/hasmin.png" alt="Hasmin" class="h-25 w-auto opacity-90" />
-                    <img src="images/ivory.png" alt="Ivory" class="h-25 w-auto opacity-90" />
-                    <img src="images/prima.png" alt="Prima" class="h-25 w-auto opacity-90" />
-                    <!-- Duplicated for seamless loop -->
-                    <img src="images/dinorado.png" alt="Dinorado" class="h-25 w-auto opacity-90" />
-                    <img src="images/hasmin.png" alt="Hasmin" class="h-25 w-auto opacity-90" />
-                    <img src="images/ivory.png" alt="Ivory" class="h-25 w-auto opacity-90" />
-                    <img src="images/prima.png" alt="Prima" class="h-25 w-auto opacity-90" />
-                    <img src="images/dinorado.png" alt="Dinorado" class="h-25 w-auto opacity-90" />
-                    <img src="images/hasmin.png" alt="Hasmin" class="h-25 w-auto opacity-90" />
-                    <img src="images/ivory.png" alt="Ivory" class="h-25 w-auto opacity-90" />
-                    <img src="images/prima.png" alt="Prima" class="h-25 w-auto opacity-90" />
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="py-[70px] bg-white bg-gradient-to-b from-green-200/60 to-green-200/30">
-        <div class="mx-auto w-[92%] max-w-[1200px]">
-            <h2 class="text-center text-3xl md:text-4xl font-extrabold text-green-900 m-0 mb-2">Explore more</h2>
-            <p class="text-center m-0 mb-9 text-gray-700 max-w-[70ch] mx-auto">
-                Jump to detailed pages for company info, product lineup, branches, and more.
-            </p>
-
-            <div class="flex flex-wrap justify-center gap-[22px]">
-
-                <!-- About Us -->
-                <a href="{{ route('about') }}" class="block bg-white rounded-[14px] shadow-md border border-[#e7efe8] p-6 hover:border-green-700 hover:bg-green-80 hover:shadow-green-700 transition">
-                    <div class="flex items-center gap-3 mb-2 text-green-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 12c2.7 0 4.88-2.18 4.88-4.88S14.7 2.24 12 2.24 7.12 4.42 7.12 7.12 9.3 12 12 12zm0 2.25c-3.14 0-9.38 1.58-9.38 4.69v2.06h18.75v-2.06c0-3.11-6.24-4.69-9.37-4.69z" />
-                        </svg>
-                        <h3 class="m-0 text-xl text-[#185a33] font-extrabold">About Us</h3>
-                    </div>
-                    <p class="m-0 text-[#2d3d2a]">Mission, vision, and our story.</p>
-                </a>
-
-                <!-- Products -->
-                <a href="{{ route('products') }}" class="block bg-white rounded-[14px] shadow-md border border-[#e7efe8] p-6 hover:border-green-700 hover:bg-green-80 hover:shadow-green-700 transition">
-                    <div class="flex items-center gap-3 mb-2 text-green-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M3 4v16h18V4H3zm16 14H5V8h14v10zM8 10h2v6H8v-6zm6 0h2v6h-2v-6z" />
-                        </svg>
-                        <h3 class="m-0 text-xl text-[#185a33] font-extrabold">Products</h3>
-                    </div>
-                    <p class="m-0 text-[#2d3d2a]">See available rice varieties.</p>
-                </a>
-
-                <!-- Branch Locator -->
-                <a href="{{ route('branches') }}" class="block bg-white rounded-[14px] shadow-md border border-[#e7efe8] p-6 hover:border-green-700 hover:bg-green-80 hover:shadow-green-700 transition">
-                    <div class="flex items-center gap-3 mb-2 text-green-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
-                        </svg>
-                        <h3 class="m-0 text-xl text-[#185a33] font-extrabold">Branch Locator</h3>
-                    </div>
-                    <p class="m-0 text-[#2d3d2a]">Find a store near you.</p>
-                </a>
-
-            </div>
-        </div>
-    </section>
-
-
-
-    <section id="contact" class="py-[70px] bg-[#2f7a47]">
-        <div class="mx-auto w-[92%] max-w-[1200px]">
-            <h2 class="text-center text-3xl md:text-4xl font-extrabold text-white m-0 mb-2">
-                Franchising and Wholesale
-            </h2>
-            <p class="text-center m-0 mb-9 text-white/100 max-w-[70ch] mx-auto">
-                We provide reliable supply for sari-sari stores, restaurants, and supermarkets. Let’s talk about volume pricing and delivery schedules.
-            </p>
-
-            <div class="grid gap-6 md:grid-cols-3">
-
-                <!-- Flexible Payment Terms -->
-                <article class="bg-white rounded-[14px] shadow-md border border-green-200 p-6">
-                    <div class="flex items-center gap-3 mb-2 text-green-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 14.59l-3.29-3.3 1.42-1.41 1.87 1.88 3.88-3.88 1.41 1.41L13 16.59z" />
-                        </svg>
-                        <h3 class="m-0 text-xl text-[#185a33] font-extrabold">Flexible Payment Terms</h3>
-                    </div>
-                    <p class="m-0 text-[#2d3d2a]">Enjoy flexible arrangements to suit your business needs.</p>
-                </article>
-
-                <!-- Scheduled Deliveries -->
-                <article class="bg-white rounded-[14px] shadow-md border border-green-200 p-6">
-                    <div class="flex items-center gap-3 mb-2 text-green-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 1l3 7h7l-5.5 4 2 7L12 16l-6.5 3 2-7L2 8h7z" />
-                        </svg>
-                        <h3 class="m-0 text-xl text-[#185a33] font-extrabold">Scheduled Deliveries</h3>
-                    </div>
-                    <p class="m-0 text-[#2d3d2a]">We deliver on time to keep your shelves stocked.</p>
-                </article>
-
-                <!-- Brand & Marketing Support -->
-                <article class="bg-white rounded-[14px] shadow-md border border-green-200 p-6">
-                    <div class="flex items-center gap-3 mb-2 text-green-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm-7 9a7 7 0 0114 0H5z" />
-                        </svg>
-                        <h3 class="m-0 text-xl text-[#185a33] font-extrabold">Brand & Marketing Support</h3>
-                    </div>
-                    <p class="m-0 text-[#2d3d2a]">Boost your business with our brand materials and promotions.</p>
-                </article>
-
-            </div>
-        </div>
-    </section>
-
-
-    <section class="py-[70px] bg-[#2f7a47]">
-        <div class="mx-auto w-[92%] max-w-[1200px]">
-            <h2 class="text-center text-3xl md:text-4xl font-extrabold text-white m-0 mb-2">
-                Frequently Asked Questions
-            </h2>
-            <p class="text-center m-0 mb-9 text-white/100 max-w-[70ch] mx-auto">
-                Quick answers to common questions about supply, delivery, and pricing.
-            </p>
-            <div class="grid gap-4 md:grid-cols-2">
-                <details class="rounded-lg bg-white p-4 open:bg-green-50 shadow-md">
-                    <summary class="cursor-pointer font-semibold text-[#185a33]">
-                        Do you deliver outside Cebu?
-                    </summary>
-                    <div class="mt-2 text-[#2d3d2a]">
-                        Yes. We primarily serve Cebu but can arrange logistics to nearby provinces for wholesale orders.
-                    </div>
-                </details>
-                <details class="rounded-lg bg-white p-4 open:bg-green-50 shadow-md">
-                    <summary class="cursor-pointer font-semibold text-[#185a33]">
-                        What is the minimum order for wholesale?
-                    </summary>
-                    <div class="mt-2 text-[#2d3d2a]">
-                        Minimums vary by variety. Typically 10 sacks and up. Contact us for current terms.
-                    </div>
-                </details>
-                <details class="rounded-lg bg-white p-4 open:bg-green-50 shadow-md">
-                    <summary class="cursor-pointer font-semibold text-[#185a33]">
-                        Can I request samples?
-                    </summary>
-                    <div class="mt-2 text-[#2d3d2a]">
-                        We can arrange samples for qualified wholesale buyers. Please reach out with your requirements.
-                    </div>
-                </details>
-                <details class="rounded-lg bg-white p-4 open:bg-green-50 shadow-md">
-                    <summary class="cursor-pointer font-semibold text-[#185a33]">
-                        Do prices change often?
-                    </summary>
-                    <div class="mt-2 text-[#2d3d2a]">
-                        We provide transparent, updated pricing based on market conditions. Get a quote for the latest rates.
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-
-    <a href="{{ route('contact') }}" class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#185a33] text-white font-bold shadow-lg hover:bg-[#134629] focus:outline-none focus:ring-2 focus:ring-white" aria-label="Contact Bigasan Hub">
+    <button type="button" data-open-modal="contact-modal-form" class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#185a33] text-white font-bold shadow-lg hover:bg-[#134629] focus:outline-none focus:ring-2 focus:ring-white" aria-label="Contact Bigasan Hub">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
             <path d="M2 5a3 3 0 0 1 3-3h2a1 1 0 0 1 1 1v3a1 1 0 0 1-.553.894l-1.447.724a10.97 10.97 0 0 0 4.382 4.382l.724-1.447A1 1 0 0 1 13 10h3a1 1 0 0 1 1 1v2a3 3 0 0 1-3 3h-1a11 11 0 0 1-11-11V5Z" />
         </svg>
         <span>Contact Us</span>
-    </a>
+    </button>
 
-    <footer class="text-black py-8 bg-green-100">
-        <div class="mx-auto w-[92%] max-w-[1200px] flex flex-col items-center gap-3 text-center">
-            <div class="flex gap-3">
-                <a class="w-9 h-9 inline-flex items-center justify-center" href="https://www.facebook.com/people/Bigasan-Hub-PH/61573715723031/" title="Facebook" aria-label="Facebook" target="_blank" rel="noopener">
-                    <img src="/images/facebook.png" alt="Facebook" class="w-7 h-7 object-contain" />
-                </a>
-                <a class="w-9 h-9 inline-flex items-center justify-center" href="https://www.instagram.com/bigasan_hub/" title="Instagram" aria-label="Instagram" target="_blank" rel="noopener">
-                    <img src="/images/instagram.png" alt="Instagram" class="w-7 h-7 object-contain" />
-                </a>
-                <a class="w-9 h-9 inline-flex items-center justify-center" href="info@bigasanhub.com" title="Gmail" aria-label="Gmail" target="_blank" rel="noopener">
-                    <img src="/images/gmail.png" alt="Gmail" class="w-7 h-7 object-contain" />
-                </a>
-            </div>
-            <p class="m-0"><a href="https://bigasanhub.com" target="_blank" style="color: inherit; text-decoration: none;">© {{ date('Y') }} Bigasan Hub. All rights reserved.</a></p>
-        </div>
-    </footer>
+    @include('partials.footer')
+    <script>
+        // Auto-hide success messages
+        document.addEventListener('DOMContentLoaded', function() {
+            const successMessage = document.querySelector('.fixed.top-4');
+            if (successMessage) {
+                setTimeout(() => {
+                    successMessage.style.opacity = '0';
+                    successMessage.style.transform = 'translate(-50%, -100%)';
+                    setTimeout(() => {
+                        successMessage.remove();
+                    }, 300);
+                }, 5000); // Hide after 5 seconds
+            }
+        });
+
+        // Custom success notification function
+        function showSuccessNotification(message) {
+            console.log('showSuccessNotification called with:', message);
+            const notification = document.getElementById('successNotification');
+            const messageElement = document.getElementById('successMessage');
+            
+            console.log('Notification element found:', notification);
+            console.log('Message element found:', messageElement);
+            
+            if (notification && messageElement) {
+                messageElement.textContent = message;
+                notification.style.opacity = '1';
+                notification.style.transform = 'translate(-50%, 0) scale(1)';
+                notification.style.pointerEvents = 'auto';
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translate(-50%, -100%) scale(0.95)';
+                    notification.style.pointerEvents = 'none';
+                }, 4000); // Hide after 4 seconds
+            } else {
+                // Fallback to alert if elements not found
+                console.log('Elements not found, using alert fallback');
+                alert(message);
+            }
+        }
+    </script>
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             // Animate hero title, subtext, and Franchise Now button uniformly
@@ -609,35 +336,125 @@
             animate();
         });
     </script>
-
     <script>
-        document.getElementById('franchiseForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // prevent normal form submit
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const franchiseForm = document.getElementById('franchiseForm');
+            if (franchiseForm) {
+                franchiseForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); // prevent normal form submit
 
-            let form = this;
-            let formData = new FormData(form);
-            let alertDiv = document.getElementById('franchiseAlert');
+                    let form = this;
+                    let formData = new FormData(form);
+                    let alertDiv = document.getElementById('franchiseAlert');
+                    
+                    console.log('Franchise form submitted');
+                    console.log('Alert div found:', alertDiv);
 
-            fetch(form.action, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                    },
-                    body: formData
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        alertDiv.innerHTML = `<div class="p-3 rounded bg-green-200 text-green-900">${data.message}</div>`;
-                        form.reset();
-                    } else {
-                        alertDiv.innerHTML = `<div class="p-3 rounded bg-red-200 text-red-900">Something went wrong. Try again.</div>`;
-                    }
-                })
-                .catch(err => {
-                    alertDiv.innerHTML = `<div class="p-3 rounded bg-red-200 text-red-900">Submission failed. Check your input.</div>`;
-                    console.error(err);
+                    fetch(form.action, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                                'Accept': 'application/json',
+                                'X-Requested-With': 'XMLHttpRequest'
+                            },
+                            body: formData
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log('Response data:', data);
+                            if (data.success) {
+                                // Reset form first
+                                form.reset();
+                                
+                                // Show alert and close modals after user clicks OK
+                                alert('Thank you for your franchise application! We will get back to you soon.');
+                                
+                                // Close both modals after alert is dismissed
+                                const signupModal = document.getElementById('signup-modal-form');
+                                const franchiseModal = document.getElementById('franchise-modal-form');
+                                if (signupModal) {
+                                    signupModal.classList.add('hidden');
+                                }
+                                if (franchiseModal) {
+                                    franchiseModal.classList.add('hidden');
+                                }
+                                
+                                // Re-enable body scroll
+                                document.body.style.overflow = 'auto';
+                                document.body.style.position = 'static';
+                                
+                                console.log('Franchise application submitted successfully');
+                            } else {
+                                alertDiv.innerHTML = `<div class="p-3 rounded bg-red-200 text-red-900">Something went wrong. Try again.</div>`;
+                            }
+                        })
+                        .catch(err => {
+                            console.error('Fetch error:', err);
+                            alertDiv.innerHTML = `<div class="p-3 rounded bg-red-200 text-red-900">Submission failed: ${err.message}</div>`;
+                        });
                 });
+            }
+
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); // prevent normal form submit
+
+                    let form = this;
+                    let formData = new FormData(form);
+                    let alertDiv = document.getElementById('contactAlert');
+
+                    fetch(form.action, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                                'Accept': 'application/json',
+                                'X-Requested-With': 'XMLHttpRequest'
+                            },
+                            body: formData
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log('Contact response data:', data);
+                            if (data.success) {
+                                // Reset form first
+                                form.reset();
+                                
+                                // Show alert and close modals after user clicks OK
+                                alert('Thank you for contacting us! We will get back to you soon.');
+                                
+                                // Close all modals after alert is dismissed
+                                const contactModal = document.getElementById('contact-modal-form');
+                                const franchiseModal = document.getElementById('franchise-modal-form');
+                                const signupModal = document.getElementById('signup-modal-form');
+                                
+                                if (contactModal) {
+                                    contactModal.classList.add('hidden');
+                                }
+                                if (franchiseModal) {
+                                    franchiseModal.classList.add('hidden');
+                                }
+                                if (signupModal) {
+                                    signupModal.classList.add('hidden');
+                                }
+                                
+                                // Re-enable body scroll
+                                document.body.style.overflow = 'auto';
+                                document.body.style.position = 'static';
+                                
+                                console.log('Contact form submitted successfully');
+                            } else {
+                                alertDiv.innerHTML = `<div class="p-3 rounded bg-red-200 text-red-900">Something went wrong. Try again.</div>`;
+                            }
+                        })
+                        .catch(err => {
+                            console.error('Contact fetch error:', err);
+                            alertDiv.innerHTML = `<div class="p-3 rounded bg-red-200 text-red-900">Submission failed: ${err.message}</div>`;
+                        });
+                });
+            }
         });
     </script>
 </body>

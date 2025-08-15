@@ -15,6 +15,36 @@
         @else
             <script src="https://cdn.tailwindcss.com"></script>
         @endif
+        <style>
+            @keyframes fadeInLeft {
+                from { opacity: 0; transform: translateX(-40px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes fadeInRight {
+                from { opacity: 0; transform: translateX(40px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes fadeInTop {
+                from { opacity: 0; transform: translateY(40px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .fadein-left, .fadein-right, .fadein-top {
+                opacity: 0;
+                transition: opacity 0.3s, transform 0.3s;
+            }
+            .fadein-left.visible {
+                opacity: 1;
+                animation: fadeInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+            .fadein-right.visible {
+                opacity: 1;
+                animation: fadeInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+            .fadein-top.visible {
+                opacity: 1;
+                animation: fadeInTop 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+        </style>
     </head>
     <body class="min-h-screen bg-[radial-gradient(1200px_600px_at_50%_-200px,#c8e6c9_0%,#a5d6a7_30%,#66bb6a_60%,#388e3c_100%)] bg-fixed text-[#0f2613]" style="font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;">
 		<header class="w-full bg-gradient-to-r from-gray-100 to-green-700">
@@ -43,14 +73,15 @@
 			</div>
 		</header>
 
-        <main>
+        <main class="fadein-top">
             @yield('content')
         </main>
 
-        <a href="{{ route('contact') }}" class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#185a33] text-white font-bold shadow-lg hover:bg-[#134629] focus:outline-none focus:ring-2 focus:ring-white" aria-label="Contact Bigasan Hub">
+        @include('partials.modals.contact-modal')
+        <button type="button" data-open-modal="contact-modal-form" class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#185a33] text-white font-bold shadow-lg hover:bg-[#134629] focus:outline-none focus:ring-2 focus:ring-white" aria-label="Contact Bigasan Hub">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 5a3 3 0 0 1 3-3h2a1 1 0 0 1 1 1v3a1 1 0 0 1-.553.894l-1.447.724a10.97 10.97 0 0 0 4.382 4.382l.724-1.447A1 1 0 0 1 13 10h3a1 1 0 0 1 1 1v2a3 3 0 0 1-3 3h-1a11 11 0 0 1-11-11V5Z"/></svg>
             <span>Contact Us</span>
-        </a>
+        </button>
 
         <footer class="text-black py-8 bg-green-100">
         <div class="mx-auto w-[92%] max-w-[1200px] flex flex-col items-center gap-3 text-center">

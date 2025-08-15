@@ -12,8 +12,6 @@ document.addEventListener('click', (e) => {
   if (!el) return;
 
   e.preventDefault();
-  // If link is intended to open modal, skip smooth scroll
-  if (target.hasAttribute('data-open-franchise-modal')) return;
   el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
@@ -35,57 +33,6 @@ if (header) {
 
 // Mobile menu toggle (hamburger)
 (() => {
-  // Franchise modal open/close
-  const modal = document.getElementById('franchise-modal');
-  if (modal) {
-    document.addEventListener('click', (e) => {
-      const openBtn = e.target.closest('[data-open-franchise-modal]');
-      const closeBackdrop = e.target.closest('[data-close-modal]');
-      const closeBtn = e.target.closest('button[data-close-modal]');
-      if (openBtn) {
-        modal.classList.remove('hidden');
-        document.body.classList.add('overflow-hidden');
-      } else if (closeBackdrop || closeBtn) {
-        modal.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-      }
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-        modal.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-      }
-    });
-  }
-
-  // Signup modal open
-        const signupOpenBtn = document.querySelector('[data-open-signup-modal]');
-        const signupModal = document.getElementById('signup-modal');
-        if (signupOpenBtn && signupModal) {
-            signupOpenBtn.addEventListener('click', () => {
-                signupModal.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden');
-            });
-        }
-
-        // Signup modal close
-        document.addEventListener('click', (e) => {
-            const closeBackdrop = e.target.closest('[data-close-modal]');
-            const closeBtn = e.target.closest('button[data-close-modal]');
-            if ((closeBackdrop || closeBtn) && signupModal) {
-                signupModal.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && signupModal && !signupModal.classList.contains('hidden')) {
-                signupModal.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
-            }
-        });
-
-
   const toggleBtn = document.getElementById('mobile-menu-toggle');
   const menu = document.getElementById('mobile-menu');
   const iconMenu = document.getElementById('icon-menu');
@@ -474,3 +421,50 @@ if (header) {
     }
   });
 })();
+
+// Unified modal open/close logic for all modals using data-open-modal and id pattern *-modal-form
+document.addEventListener('DOMContentLoaded', function() {
+    // Open modal
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var modalId = btn.getAttribute('data-open-modal');
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            }
+        });
+    });
+    // Close modal
+    document.querySelectorAll('[id$="-modal-form"]').forEach(function(modal) {
+        modal.querySelectorAll('[data-close-modal]').forEach(function(el) {
+            el.addEventListener('click', function() {
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            });
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        });
+    });
+});
+
+// Scroll-triggered fade-in left/right/top effect (unlimited)
+document.addEventListener('DOMContentLoaded', function() {
+    const observer = new window.IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fadein-left, .fadein-right, .fadein-top').forEach(el => {
+        observer.observe(el);
+    });
+});

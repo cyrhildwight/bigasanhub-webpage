@@ -183,13 +183,14 @@
     </div>
 
     <main id="home" class="w-full">
-        <section class="relative overflow-hidden isolate rounded-none bg-gradient-to-b from-green-100 to-white h-[62vh] min-h-[440px]" aria-label="Hero">
-            <div class="absolute inset-0" data-hero-slides='["images/download.jpg","images/download1.jpg","images/download2.jpg","images/download3.jpg","images/download5.jpg","images/download6.jpg","images/download7.jpg","images/download8.jpg","images/download9.jpg","images/download10.jpg","images/download11.jpg","images/download12.jpg","images/download13.jpg","images/download14.jpg"]'></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black/50 z-[1]"></div>
-
-            <div class="absolute inset-x-[6%] top-[12%] p-9 text-white z-10">
-                <h1 class="m-0 mb-2 text-4xl md:text-5xl lg:text-6xl font-extrabold fadeup-entrance" id="hero-title">Welcome to Bigasan Hub</h1>
-                <p class="m-0 mb-5 opacity-95 max-w-[65ch] leading-relaxed fadeup-entrance" id="hero-subtext" style="animation-delay:0.15s;">Premier rice supplier for households, restaurants, and retailers across the Philippines. Quality varieties, competitive pricing, and reliable wholesale and retail distribution.</p>
+        <section class="relative w-full min-h-screen h-screen flex items-center justify-center overflow-hidden p-0 m-0" aria-label="Hero">
+            <div class="absolute inset-0 w-full h-full">
+                <img src="/images/download.jpg" alt="Bigasan Hub Hero" class="hero-parallax-bg w-full h-full object-cover object-center select-none pointer-events-none" style="z-index:1;" draggable="false" />
+                <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black/50 z-[2]"></div>
+            </div>
+            <div class="relative z-10 w-full flex flex-col items-center justify-center px-6">
+                <h1 class="text-white text-center text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 fadeup-entrance" id="hero-title">Welcome to Bigasan Hub</h1>
+                <p class="text-white/90 text-center text-lg md:text-xl max-w-2xl mx-auto mb-6 fadeup-entrance" id="hero-subtext" style="animation-delay:0.15s;">Premier rice supplier for households, restaurants, and retailers across the Philippines. Quality varieties, competitive pricing, and reliable wholesale and retail distribution.</p>
                 <button type="button" class="inline-block px-6 py-3 rounded-full bg-green-700 text-white font-bold shadow-lg hover:bg-green-600 transition fadeup-entrance" style="animation-delay:0.3s;" data-open-modal="franchise-modal-form">Franchise Now</button>
             </div>
         </section>
@@ -208,7 +209,6 @@
 
     @include('partials.sections.why-choose')
     @include('partials.sections.featured-varieties')
-    @include('partials.sections.marquee')
     @include('partials.sections.explore-more')
     @include('partials.sections.contact')
     @include('partials.sections.faq')
@@ -262,6 +262,35 @@
                 alert(message);
             }
         }
+</script>
+    <script>
+        // Hero image zooms in until it disappears at max scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroBg = document.querySelector('.hero-parallax-bg');
+            const heroSection = heroBg?.closest('section');
+            if (!heroBg || !heroSection) return;
+            let targetScale = 1;
+            let currentScale = 1;
+            function updateTargetScale() {
+                const rect = heroSection.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                // Calculate how much the hero section has been scrolled through
+                let progress = 1 - Math.max(0, rect.bottom) / (rect.height || 1);
+                progress = Math.max(0, Math.min(1, progress));
+                // Max scale (e.g., 3x) when fully scrolled past hero
+                targetScale = 1 + progress * 2.5;
+                // Optionally fade out as it zooms past 2x
+                heroBg.style.opacity = (progress < 0.8) ? 1 : Math.max(0, 1.2 - progress * 1.5);
+            }
+            function animateZoom() {
+                currentScale += (targetScale - currentScale) * 0.08;
+                heroBg.style.transform = `scale(${currentScale})`;
+                requestAnimationFrame(animateZoom);
+            }
+            window.addEventListener('scroll', updateTargetScale, { passive: true });
+            updateTargetScale();
+            animateZoom();
+        });
     </script>
     <script>
         window.addEventListener('DOMContentLoaded', () => {

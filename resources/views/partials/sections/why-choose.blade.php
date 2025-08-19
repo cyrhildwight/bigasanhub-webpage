@@ -1,4 +1,17 @@
-<section class="py-[70px] bg-green-100">
+<section class="why-choose-section py-[70px] bg-green-100">
+<style>
+    .why-choose-section svg,
+    .why-choose-section img {
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
+        cursor: zoom-in;
+    }
+    .why-choose-section svg:hover,
+    .why-choose-section img:hover {
+        transform: scale(1.2);
+        z-index: 2;
+    }
+</style>
     <div class="mx-auto w-[92%] max-w-[1200px]">
         <h2 class="text-center text-3xl md:text-4xl font-extrabold text-green-900 m-0 mb-2 fadein-top">
             Why choose Bigasan Hub

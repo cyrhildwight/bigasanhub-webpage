@@ -2,13 +2,13 @@
 
 @section('content')
 <main>
-    <section class="py-[70px] bg-white bg-gradient-to-b from-green-100 to-[#e9f7ea] fadein-top">
+    <section class="py-[70px] bg-[#2f7a47] fadein-top">
         <div class="mx-auto w-[92%] max-w-[1200px] grid items-center gap-9 md:[grid-template-columns:1.2fr_1fr]">
             <div>
-                <h1 class="text-center md:text-left text-3xl md:text-4xl font-extrabold text-green-900 m-0 mb-2">
+                <h1 class="text-center md:text-left text-3xl md:text-4xl font-extrabold text-white m-0 mb-2">
                     About Bigasan Hub
                 </h1>
-                <p class="text-center md:text-justify text-gray-700 m-0 mb-9 max-w-[70ch]">
+                <p class="text-center md:text-justify text-white m-0 mb-9 max-w-[70ch]">
                     BIGASAN HUB is a premier rice retail and wholesale business dedicated to providing quality rice products to households, restaurants, retailers, and institutions. With a focus on affordability and reliability, BIGASAN HUB aims to become a trusted name in the rice industry across the Philippines.
                 </p>
             </div>

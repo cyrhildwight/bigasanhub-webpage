@@ -56,34 +56,19 @@
                     <div class="fadein-left">
                         <h3 class="text-[#ffffff] font-extrabold text-xl m-0 pb-2 border-b border-[#2E6F40]">Our Franchise Packages Include:</h3>
                         <ul class="mt-4 space-y-4">
-                            <li class="flex gap-3">
-                                <span class="mt-1 inline-flex w-5 h-5 items-center justify-center rounded-full bg-[#2E6F40] text-[#ffffff]">✓</span>
-                                <div>
-                                    <div class="font-semibold text-[#ffffff]">Turnkey Setup:</div>
-                                    <div class="text-sm text-[#ffffff]/70">Complete store setup with branding, equipment, and inventory.</div>
-                                </div>
-                            </li>
-                            <li class="flex gap-3">
-                                <span class="mt-1 inline-flex w-5 h-5 items-center justify-center rounded-full bg-[#2E6F40] text-[#ffffff]">✓</span>
-                                <div>
-                                    <div class="font-semibold text-[#ffffff]">Supply Chain Support:</div>
-                                    <div class="text-sm text-[#ffffff]/70">Direct sourcing from trusted rice suppliers and importers.</div>
-                                </div>
-                            </li>
-                            <li class="flex gap-3">
-                                <span class="mt-1 inline-flex w-5 h-5 items-center justify-center rounded-full bg-[#2E6F40] text-[#ffffff]">✓</span>
-                                <div>
-                                    <div class="font-semibold text-[#ffffff]">Marketing & Branding Assistance:</div>
-                                    <div class="text-sm text-[#ffffff]/70">Promotional materials, digital marketing strategies, and ongoing support.</div>
-                                </div>
-                            </li>
-                            <li class="flex gap-3">
-                                <span class="mt-1 inline-flex w-5 h-5 items-center justify-center rounded-full bg-[#2E6F40] text-[#ffffff]">✓</span>
-                                <div>
-                                    <div class="font-semibold text-[#ffffff]">Training & Operations Support:</div>
-                                    <div class="text-sm text-[#ffffff]/70">Guidance on inventory management and financial monitoring.</div>
-                                </div>
-                            </li>
+                            @forelse(($features ?? []) as $feature)
+                                <li class="flex gap-3">
+                                    <span class="mt-1 inline-flex w-5 h-5 items-center justify-center rounded-full bg-[#2E6F40] text-[#ffffff]">✓</span>
+                                    <div>
+                                        <div class="font-semibold text-[#ffffff]">{{ $feature->title }}</div>
+                                        @if(!empty($feature->description))
+                                            <div class="text-sm text-[#ffffff]/70">{{ $feature->description }}</div>
+                                        @endif
+                                    </div>
+                                </li>
+                            @empty
+                                <li class="text-[#ffffff]/70">No features listed yet.</li>
+                            @endforelse
                         </ul>
                     </div>
                     <div class="fadein-right">

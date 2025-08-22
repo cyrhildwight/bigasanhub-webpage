@@ -130,10 +130,6 @@
             }
         }
 
-        < !-- Parallax/zoom JS removed from hero image -->
-        }
-        }
-
         .animated-entrance {
             opacity: 0;
             animation: fadeInUp 1s ease-out forwards;

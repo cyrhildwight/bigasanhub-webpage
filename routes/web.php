@@ -20,4 +20,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
 	Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+	Route::post('/admin/features', [AdminController::class, 'storeFeature'])->name('admin.features.store');
+	Route::put('/admin/features/{feature}', [AdminController::class, 'updateFeature'])->name('admin.features.update');
+	Route::delete('/admin/features/{feature}', [AdminController::class, 'deleteFeature'])->name('admin.features.delete');
+	Route::post('/admin/varieties', [AdminController::class, 'storeVariety'])->name('admin.varieties.store');
+	Route::put('/admin/varieties/{variety}', [AdminController::class, 'updateVariety'])->name('admin.varieties.update');
+	Route::delete('/admin/varieties/{variety}', [AdminController::class, 'deleteVariety'])->name('admin.varieties.delete');
+	Route::post('/admin/featured-varieties', [AdminController::class, 'storeFeaturedVariety'])->name('admin.featured-varieties.store');
+	Route::put('/admin/featured-varieties/{featuredVariety}', [AdminController::class, 'updateFeaturedVariety'])->name('admin.featured-varieties.update');
+	Route::delete('/admin/featured-varieties/{featuredVariety}', [AdminController::class, 'deleteFeaturedVariety'])->name('admin.featured-varieties.delete');
 });

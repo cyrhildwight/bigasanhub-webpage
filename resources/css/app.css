@@ -1,1 +1,48 @@
+html, body {
+	background: linear-gradient(180deg, #0d2613 0%, #185a33 60%, #134629 100%);
+	color: #e6ffe6;
+	scroll-behavior: smooth;
+}
+
+.card, .bg-white, .bg-green-100, .bg-green-200, .bg-green-300, .bg-green-600, .bg-green-700, .bg-green-900 {
+	background-color: #185a33 !important;
+	color: #e6ffe6 !important;
+	border-color: #134629 !important;
+}
+
+.text-green-700, .text-green-900, .text-green-600, .text-green-200, .text-green-100 {
+	color: #b6ffb6 !important;
+}
+
+.border-green-300, .border-green-200, .border-green-100 {
+	border-color: #134629 !important;
+}
+
+.shadow-lg, .shadow-2xl {
+	box-shadow: 0 8px 32px 0 rgba(24,90,51,0.5) !important;
+}
+
+.parallax-section {
+	position: relative;
+	width: 100vw;
+	z-index: 1;
+	overflow: hidden;
+}
+.parallax-image {
+	position: sticky;
+	top: 0;
+	min-height: 100vh;
+	height: 100vh;
+	width: 100vw;
+	background-size: cover;
+	background-position: center;
+	z-index: 1;
+	transition: box-shadow 0.3s;
+	box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+	display: block;
+}
+.parallax-image + .parallax-image {
+	margin-top: -30vh; /* overlap effect, adjust as needed */
+}
+
 @import 'tailwindcss';

@@ -4,23 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Franchise;
+use App\Models\Feature;
+use App\Models\ProductVariety;
+use App\Models\FeaturedVariety;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        $featuredVarieties = FeaturedVariety::where('is_active', true)->orderBy('position')->get();
+        return view('welcome', compact('featuredVarieties'));
     }
 
     public function about()
     {
-        return view('about');
+        $features = Feature::orderBy('position')->get();
+        return view('about', compact('features'));
     }
 
     public function products()
     {
-        return view('products');
+        $varieties = ProductVariety::where('is_active', true)->orderBy('position')->get();
+        return view('products', compact('varieties'));
     }
 
     public function branches()

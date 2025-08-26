@@ -29,4 +29,7 @@ Route::middleware('auth')->group(function () {
 	Route::post('/admin/featured-varieties', [AdminController::class, 'storeFeaturedVariety'])->name('admin.featured-varieties.store');
 	Route::put('/admin/featured-varieties/{featuredVariety}', [AdminController::class, 'updateFeaturedVariety'])->name('admin.featured-varieties.update');
 	Route::delete('/admin/featured-varieties/{featuredVariety}', [AdminController::class, 'deleteFeaturedVariety'])->name('admin.featured-varieties.delete');
+	Route::post('/admin/faqs', [AdminController::class, 'storeFAQ'])->name('admin.faqs.store');
+	Route::put('/admin/faqs/{faq}', [AdminController::class, 'updateFAQ'])->name('admin.faqs.update');
+	Route::delete('/admin/faqs/{faq}', [AdminController::class, 'deleteFAQ'])->name('admin.faqs.delete');
 });

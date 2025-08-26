@@ -7,38 +7,20 @@
             Quick answers to common questions about supply, delivery, and pricing.
         </p>
         <div class="grid gap-4 md:grid-cols-2">
-            <details class="rounded-lg bg-[#185a33] p-4 open:bg-[#237d4a] shadow-md fadein-top transition hover:shadow-xl hover:border-white border border-transparent">
-                <summary class="cursor-pointer font-semibold text-white">
-                    Do you deliver outside Cebu?
-                </summary>
-                <div class="mt-2 text-white">
-                    Yes. We primarily serve Cebu but can arrange logistics to nearby provinces for wholesale orders.
+            @forelse(($faqs ?? []) as $faq)
+                <details class="rounded-lg bg-[#185a33] p-4 open:bg-[#237d4a] shadow-md fadein-top transition hover:shadow-xl hover:border-white border border-transparent">
+                    <summary class="cursor-pointer font-semibold text-white">
+                        {{ $faq->question }}
+                    </summary>
+                    <div class="mt-2 text-white">
+                        {{ $faq->answer }}
+                    </div>
+                </details>
+            @empty
+                <div class="col-span-full text-center text-white/70 py-8">
+                    <p>No FAQs available yet.</p>
                 </div>
-            </details>
-            <details class="rounded-lg bg-[#185a33] p-4 open:bg-[#237d4a] shadow-md fadein-top transition hover:shadow-xl hover:border-white border border-transparent">
-                <summary class="cursor-pointer font-semibold text-white">
-                    What is the minimum order for wholesale?
-                </summary>
-                <div class="mt-2 text-white">
-                    Minimums vary by variety. Typically 10 sacks and up. Contact us for current terms.
-                </div>
-            </details>
-            <details class="rounded-lg bg-[#185a33] p-4 open:bg-[#237d4a] shadow-md fadein-top transition hover:shadow-xl hover:border-white border border-transparent">
-                <summary class="cursor-pointer font-semibold text-white">
-                    Can I request samples?
-                </summary>
-                <div class="mt-2 text-white">
-                    We can arrange samples for qualified wholesale buyers. Please reach out with your requirements.
-                </div>
-            </details>
-            <details class="rounded-lg bg-[#185a33] p-4 open:bg-[#237d4a] shadow-md fadein-top transition hover:shadow-xl hover:border-white border border-transparent">
-                <summary class="cursor-pointer font-semibold text-white">
-                    Do prices change often?
-                </summary>
-                <div class="mt-2 text-white">
-                    We provide transparent, updated pricing based on market conditions. Get a quote for the latest rates.
-                </div>
-            </details>
+            @endforelse
         </div>
     </div>
 </section>

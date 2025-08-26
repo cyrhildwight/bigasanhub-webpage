@@ -7,6 +7,7 @@ use App\Models\Franchise;
 use App\Models\Feature;
 use App\Models\ProductVariety;
 use App\Models\FeaturedVariety;
+use App\Models\FAQ;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -14,7 +15,8 @@ class LandingController extends Controller
     public function index()
     {
         $featuredVarieties = FeaturedVariety::where('is_active', true)->orderBy('position')->get();
-        return view('welcome', compact('featuredVarieties'));
+        $faqs = FAQ::where('is_active', true)->orderBy('position')->get();
+        return view('welcome', compact('featuredVarieties', 'faqs'));
     }
 
     public function about()

@@ -4,566 +4,328 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-maps-api-key" content="{{ env('GOOGLE_MAPS_API_KEY') }}">
-    <title>Bigasan Hub — Quality Rice, Wholesale & Retail</title>
+    <title>Bigasan Hub — Premium Rice for Every Filipino</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@500;700&display=swap"
+        rel="stylesheet">
 
-    {{-- Load compiled assets when Vite is available; otherwise fall back to Tailwind CDN only --}}
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
     <script src="https://cdn.tailwindcss.com"></script>
     @endif
+
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
     <style>
-        /* * {
-            color: #ffffff !important;
-        } */
-        /* Forest Green dark theme */
-        html,
         body {
-            background: #2E6F40 !important;
-            /* Forest Green */
-            color: #ffffff !important;
+            font-family: 'Poppins', sans-serif;
+            background: #0a1a0c;
+            color: #e5e7eb;
         }
 
-        .bg-white,
-        .bg-green-100,
-        .bg-green-200,
-        .bg-green-300,
-        .bg-green-600,
-        .bg-green-700,
-        .bg-green-900,
-        .card {
-            background-color: #1a4a2a !important;
-            color: #ffffff !important;
-            border-color: #0d2e1a !important;
+        /* Buttons */
+        .btn-primary {
+            @apply px-8 py-4 rounded-full font-semibold transition-all duration-300;
+            background: linear-gradient(135deg, #14532d, #22c55e);
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(22, 101, 52, 0.4);
         }
 
-        .text-green-700,
-        .text-green-900,
-        .text-green-600,
-        .text-green-200,
-        .text-green-100 {
-            color: #ffffff !important;
+        .btn-primary:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.6);
         }
 
-        .border-green-300,
-        .border-green-200,
-        .border-green-100 {
-            border-color: #0d2e1a !important;
+        /* Hero shapes animation */
+        .hero-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: float 30s infinite linear;
         }
 
-        .shadow-lg,
-        .shadow-2xl {
-            box-shadow: 0 8px 32px 0 rgba(13, 46, 26, 0.4) !important;
+        .shape1 {
+            width: 550px;
+            height: 550px;
+            background: #14532d;
+            top: -150px;
+            left: -180px;
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        .font-bold,
-        .font-extrabold {
-            color: #ffffff !important;
+        .shape2 {
+            width: 400px;
+            height: 400px;
+            background: #22c55e;
+            bottom: -140px;
+            right: -120px;
         }
 
-        a,
-        .link,
-        .hover\:text-green-600:hover {
-            color: #ffffff !important;
+        .shape3 {
+            width: 250px;
+            height: 250px;
+            background: #16a34a;
+            top: 240px;
+            right: -60px;
         }
 
-        .btn,
-        button,
-        .rounded-full {
-            background-color: #ffffff !important;
-            color: #2E6F40 !important;
-            border-color: #0d2e1a !important;
-        }
-
-        .btn:hover,
-        button:hover,
-        .rounded-full:hover {
-            background-color: #0d2e1a !important;
-            color: #ffffff !important;
-        }
-
-        /* Contact button specific styles */
-        button[data-open-modal="contact-modal-form"] {
-            background-color: #2E6F40 !important;
-            color: #ffffff !important;
-        }
-
-        button[data-open-modal="contact-modal-form"]:hover {
-            background-color: #0d2e1a !important;
-            color: #ffffff !important;
-        }
-
-        .border,
-        .rounded-lg,
-        .rounded-2xl {
-            border-color: #0d2e1a !important;
-        }
-
-        @keyframes marquee-pingpong {
+        @keyframes float {
             0% {
-                transform: translateX(-100%);
-            }
-
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        @keyframes marquee-right-infinite {
-            0% {
-                transform: translateX(-50%);
-            }
-
-            100% {
-                transform: translateX(0);
-            }
-        }
-
-        .animated-entrance {
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
-        }
-
-        @keyframes bounceIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3);
+                transform: translate(0, 0);
             }
 
             50% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-
-            70% {
-                transform: scale(0.9);
+                transform: translate(50px, -50px);
             }
 
             100% {
-                opacity: 1;
-                transform: scale(1);
+                transform: translate(0, 0);
             }
         }
 
-        .bounce-entrance {
-            opacity: 0;
-            animation: bounceIn 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        /* Hero Section */
+        .perspective {
+            perspective: 1200px;
         }
 
-        @keyframes fadeUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .parallax-wrapper {
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform 0.1s ease-out;
         }
 
-        .fadeup-entrance {
-            opacity: 0;
-            animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        .parallax-img {
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            transform: translateZ(0px);
+            transition: transform 0.1s ease-out;
         }
 
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        /* Highlight cards */
+        .highlight-card {
+            background: rgba(20, 50, 30, 0.75);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(34, 197, 94, 0.25);
         }
 
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        /* Section divider */
+        .section-divider svg {
+            display: block;
+            width: 100%;
+            height: 80px;
         }
 
-        @keyframes fadeInTop {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .fill-darkgreen {
+            fill: #0a1a0c;
         }
 
-        .fadein-left,
-        .fadein-right,
-        .fadein-top {
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
+        h2.section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #d9f99d;
+            margin-bottom: 1rem;
         }
 
-        .fadein-left.visible {
-            opacity: 1;
-            animation: fadeInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        .fadein-right.visible {
-            opacity: 1;
-            animation: fadeInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        .fadein-top.visible {
-            opacity: 1;
-            animation: fadeInTop 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        p.section-subtitle {
+            font-size: 1.125rem;
+            color: #c7d8b6;
+            margin-bottom: 2rem;
         }
     </style>
 </head>
 
-<body id="smooth-bg" class="min-h-screen bg-[#2E6F40] text-[#ffffff] transition-colors duration-700" style="font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;">
-    <!-- Removed background color scroll transition so hero images show immediately when scrolling up -->
+<body class="overflow-x-hidden">
+
     @include('partials.header')
 
-    <!-- Success Message Display -->
-    @if(session('success'))
-    <div class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 p-4 rounded-lg bg-[#1a4a2a] text-[#ffffff] text-center font-semibold border border-[#0d2e1a] shadow-lg transition-all duration-300">
-        {{ session('success') }}
-    </div>
-    @endif
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center overflow-hidden px-6 md:px-20">
+        <!-- Background overlay -->
+        <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/90 via-black/70 to-green-900/60 z-0"></div>
 
-    <!-- Custom Success Notification -->
-    <div id="successNotification" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-[100] max-w-md w-[92%] bg-white border border-[#0d2e1a] rounded-2xl shadow-2xl transition-all duration-500 opacity-0 pointer-events-none overflow-hidden scale-95">
-        <div class="bg-gradient-to-r from-[#2E6F40] to-[#1a4a2a] text-[#ffffff] text-center text-xs font-bold py-2">
-            <svg class="inline-block w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-            </svg>
-            Success!
-        </div>
-        <div class="p-4 text-center">
-            <div class="flex items-center justify-center mb-3">
-                <div class="w-12 h-12 bg-[#2E6F40] rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-[#ffffff]" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                    </svg>
+        <!-- Floating shapes -->
+        <span class="hero-shape shape1"></span>
+        <span class="hero-shape shape2"></span>
+        <span class="hero-shape shape3"></span>
+
+        <!-- Content: Left text + Right image -->
+        <div class="relative z-10 w-full flex flex-col md:flex-row items-center gap-12">
+            <!-- Left: Text -->
+            <div class="md:w-1/2 text-left" data-aos="fade-right">
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+                    Welcome to <br>
+                    <span
+                        class="bg-gradient-to-r from-lime-300 via-emerald-400 to-green-500 bg-clip-text text-transparent">
+                        Bigasan Hub
+                    </span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200 mb-10">
+                    Delivering premium, fresh rice across the Philippines. Trusted by households and businesses nationwide.
+                </p>
+            </div>
+
+            <!-- Right: Image with scroll & mouse 3D parallax -->
+            <div class="md:w-1/2 perspective" data-aos="fade-left">
+                <div class="parallax-wrapper">
+                    <img src="/images/bigasan.jpg" alt="Premium Rice"
+                        class="parallax-img">
                 </div>
             </div>
-            <p id="successMessage" class="text-[#2E6F40] font-semibold text-sm leading-relaxed mb-3">Success!</p>
-            <div class="flex justify-center">
-                <div class="w-8 h-1 bg-[#0d2e1a] rounded-full"></div>
-            </div>
         </div>
-    </div>
+    </section>
 
-    <main id="home" class="w-full">
-        <section class="relative w-full min-h-screen h-screen flex items-center justify-center overflow-hidden p-0 m-0" aria-label="Hero">
-            <div class="absolute inset-0 w-full h-full pointer-events-none">
-                <img src="/images/download.jpg" alt="Bigasan Hub Hero 1" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:1;" draggable="false" />
-                <img src="/images/download1.jpg" alt="Bigasan Hub Hero 2" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <img src="/images/download2.jpg" alt="Bigasan Hub Hero 3" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <img src="/images/download3.jpg" alt="Bigasan Hub Hero 4" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <img src="/images/download5.jpg" alt="Bigasan Hub Hero 5" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <img src="/images/download6.jpg" alt="Bigasan Hub Hero 6" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <img src="/images/download7.jpg" alt="Bigasan Hub Hero 7" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <img src="/images/download8.jpg" alt="Bigasan Hub Hero 8" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <img src="/images/download9.jpg" alt="Bigasan Hub Hero 9" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <img src="/images/download10.jpg" alt="Bigasan Hub Hero 10" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <img src="/images/download11.jpg" alt="Bigasan Hub Hero 11" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <img src="/images/download12.jpg" alt="Bigasan Hub Hero 12" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <img src="/images/download13.jpg" alt="Bigasan Hub Hero 13" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <img src="/images/download14.jpg" alt="Bigasan Hub Hero 14" class="hero-parallax-bg hero-slide fixed inset-0 w-full h-full object-cover object-center transition-opacity duration-1000" style="z-index:0;opacity:0;" draggable="false" />
-                <div class="absolute inset-0 bg-gradient-to-b from-[#2E6F40]/30 via-[#1a4a2a]/40 to-black/30 z-[2]"></div>
-            </div>
-            <style>
-                @media (max-width: 768px) {
-                    .hero-slide {
-                        min-height: 320px;
-                        height: 100vh;
-                    }
-
-                    section[aria-label="Hero"] .flex {
-                        padding-top: 4rem;
-                    }
-
-                    h1#hero-title {
-                        font-size: 2rem;
-                    }
-                }
-
-                @media (max-width: 480px) {
-                    .hero-slide {
-                        min-height: 200px;
-                    }
-
-                    h1#hero-title {
-                        font-size: 1.3rem;
-                    }
-                }
-            </style>
-            <div class="absolute inset-0 bg-gradient-to-b from-[#2E6F40]/30 via-[#1a4a2a]/50 to-transparent z-[2]"></div>
-            </div>
-            <div class="relative z-10 w-full flex flex-col items-center justify-center px-6">
-                <h1 class="text-[#ffffff] text-center text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 fadeup-entrance" id="hero-title">Welcome to Bigasan Hub</h1>
-                <p class="text-[#ffffff]/90 text-center text-lg md:text-xl max-w-2xl mx-auto mb-6 fadeup-entrance" id="hero-subtext" style="animation-delay:0.15s;">Premier rice supplier for households, restaurants, and retailers across the Philippines. Quality varieties, competitive pricing, and reliable wholesale and retail distribution.</p>
-                <button type="button" class="inline-block px-6 py-3 rounded-full bg-[#ffffff] text-[#2E6F40] font-bold shadow-lg hover:bg-[#0d2e1a] hover:text-[#ffffff] transition fadeup-entrance" style="animation-delay:0.3s;" data-open-modal="franchise-modal-form">Franchise Now</button>
-                <!-- Scroll Down button removed -->
-            </div>
-        </section>
-        <div class="relative -mt-[2px]" aria-hidden="true">
-            <svg class="block w-full" viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                <path d="M0,32 C240,80 480,0 720,32 C960,64 1200,16 1440,48 L1440,80 L0,80 Z" fill="#0d2e1a"></path>
-            </svg>
-        </div>
-
-        <!-- Franchise Modal -->
-        @include('partials.modals.franchise-modal')
-
-        @include('partials.modals.signup-modal')
-        @include('partials.modals.contact-modal')
+    <!-- Dynamic Sections -->
+    <main>
+        @include('partials.sections.why-choose')
+        @include('partials.sections.featured-varieties')
+        @include('partials.sections.explore-more')
+        @include('partials.sections.contact')
+        @include('partials.sections.faq')
     </main>
 
-    @include('partials.sections.why-choose')
-    @include('partials.sections.featured-varieties')
-    @include('partials.sections.explore-more')
-    @include('partials.sections.contact')
-    @include('partials.sections.faq')
-    <button type="button" data-open-modal="contact-modal-form" class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#2E6F40] text-[#ffffff] font-bold shadow-lg hover:bg-[#0d2e1a] hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#0d2e1a] transition-all duration-300" aria-label="Contact Bigasan Hub">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 5a3 3 0 0 1 3-3h2a1 1 0 0 1 1 1v3a1 1 0 0 1-.553.894l-1.447.724a10.97 10.97 0 0 0 4.382 4.382l.724-1.447A1 1 0 0 1 13 10h3a1 1 0 0 1 1 1v2a3 3 0 0 1-3 3h-1a11 11 0 0 1-11-11V5Z" />
-        </svg>
-        <span>Contact Us</span>
-    </button>
+    <footer class="text-[#ffffff] py-12 bg-[#1a4a2a] border-t border-[#0d2e1a]">
+        <div class="mx-auto w-[92%] max-w-[1200px]">
+            <!-- Main Footer Content -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div class="text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start mb-4">
+                        <img src="/images/logo.png" alt="Bigasan Hub logo" class="w-12 h-12 object-contain bg-white rounded-full shadow mr-3" />
+                        <h3 class="text-xl font-bold text-white">Bigasan Hub</h3>
+                    </div>
+                    <p class="text-[#ffffff]/80 mb-4">Premier rice supplier for households, restaurants, and retailers across the Philippines.</p>
+                    <div class="flex justify-center md:justify-start gap-3">
+                        <a class="w-10 h-10 bg-[#2E6F40] rounded-full inline-flex items-center justify-center hover:bg-[#0d2e1a] transition-colors duration-300" href="https://www.facebook.com/people/Bigasan-Hub-PH/61573715723031/" title="Facebook" aria-label="Facebook" target="_blank" rel="noopener">
+                            <img src="/images/facebook.png" alt="Facebook" class="w-6 h-6 object-contain" />
+                        </a>
+                        <a class="w-10 h-10 bg-[#2E6F40] rounded-full inline-flex items-center justify-center hover:bg-[#0d2e1a] transition-colors duration-300" href="https://www.instagram.com/bigasan_hub/" title="Instagram" aria-label="Instagram" target="_blank" rel="noopener">
+                            <img src="/images/instagram.png" alt="Instagram" class="w-6 h-6 object-contain" />
+                        </a>
+                        <a class="w-10 h-10 bg-[#2E6F40] rounded-full inline-flex items-center justify-center hover:bg-[#0d2e1a] transition-colors duration-300" href="mailto:info@bigasanhub.com" title="Email" aria-label="Email" target="_blank" rel="noopener">
+                            <img src="/images/gmail.png" alt="Gmail" class="w-6 h-6 object-contain" />
+                        </a>
+                    </div>
+                </div>
 
-    @include('partials.footer')
+                <!-- Quick Links -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="{{ route('landing') }}" class="text-[#ffffff]/80 hover:text-[#ffffff] transition-colors duration-300">Home</a></li>
+                        <li><a href="{{ route('about') }}" class="text-[#ffffff]/80 hover:text-[#ffffff] transition-colors duration-300">About Us</a></li>
+                        <li><a href="{{ route('products') }}" class="text-[#ffffff]/80 hover:text-[#ffffff] transition-colors duration-300">Products</a></li>
+                        <li><a href="{{ route('branches') }}" class="text-[#ffffff]/80 hover:text-[#ffffff] transition-colors duration-300">Branch Locator</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-center md:justify-start">
+                            <svg class="w-5 h-5 text-[#2E6F40] mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                            </svg>
+                            <span class="text-[#ffffff]/80">info@bigasanhub.com</span>
+                        </div>
+                        <div class="flex items-center justify-center md:justify-start">
+                            <svg class="w-5 h-5 text-[#2E6F40] mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                            </svg>
+                            <span class="text-[#ffffff]/80">09959171079 | (032) 346 3965</span>
+                        </div>
+                        <div class="flex items-center justify-center md:justify-start">
+                            <svg class="w-7 h-7 text-[#2E6F40] mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                            </svg>
+                            <span class="text-[#ffffff]/80">8WFJ+WFH, Tipolo, Mandaue City, Cebu</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Franchise Info -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-lg font-semibold mb-4">Franchise Opportunity</h4>
+                    <div class="space-y-3">
+                        <p class="text-[#ffffff]/80 text-sm">Join our growing network of rice suppliers across the Philippines.</p>
+                        <div class="bg-[#2E6F40] rounded-lg p-3">
+                            <p class="text-sm font-semibold mb-1">OPEN FOR FRANCHISE</p>
+                            <p class="text-xs text-[#ffffff]/80">Contact us for franchise opportunities</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="border-t border-[#0d2e1a] pt-6 text-center">
+                <p class="text-[#ffffff]/60 text-sm mb-2">
+                    © {{ date('Y') }} Bigasan Hub. All rights reserved. |
+                    <a href="https://bigasanhub.com" target="_blank" class="hover:text-[#ffffff] transition-colors duration-300">www.bigasanhub.com</a>
+                </p>
+                <p class="text-[#ffffff]/40 text-xs">ALIN Group of Companies | Jamestowe Unit Do-07, Mantawe Rd.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    @include('partials.modals.franchise-modal')
+    @include('partials.modals.signup-modal')
+    @include('partials.modals.contact-modal')
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const successMessage = document.querySelector('.fixed.top-4');
-            if (successMessage) {
-                setTimeout(() => {
-                    successMessage.style.opacity = '0';
-                    successMessage.style.transform = 'translate(-50%, -100%)';
-                    setTimeout(() => {
-                        successMessage.remove();
-                    }, 300);
-                }, 5000); 
-            }
+        AOS.init({
+            once: true,
+            duration: 1000,
+            easing: 'ease-out'
         });
-        function showSuccessNotification(message) {
-            console.log('showSuccessNotification called with:', message);
-            const notification = document.getElementById('successNotification');
-            const messageElement = document.getElementById('successMessage');
 
-            console.log('Notification element found:', notification);
-            console.log('Message element found:', messageElement);
-
-            if (notification && messageElement) {
-                messageElement.textContent = message;
-                notification.style.opacity = '1';
-                notification.style.transform = 'translate(-50%, 0) scale(1)';
-                notification.style.pointerEvents = 'auto';
-
-                setTimeout(() => {
-                    notification.style.opacity = '0';
-                    notification.style.transform = 'translate(-50%, -100%) scale(0.95)';
-                    notification.style.pointerEvents = 'none';
-                }, 4000); // Hide after 4 seconds
-            } else {
-                // Fallback to alert if elements not found
-                console.log('Elements not found, using alert fallback');
-                alert(message);
-            }
-        }
-    </script>
-    <script>
-        // Automatic hero image slider with scroll fade only on active image
-        document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.hero-slide');
-            let current = 0;
-            let lastProgress = 0;
-
-            function showSlide(idx) {
-                slides.forEach((slide, i) => {
-                    slide.style.opacity = (i === idx) ? (1 - lastProgress * 1.2) : '0';
-                });
-            }
-
-            setInterval(() => {
-                current = (current + 1) % slides.length;
-                showSlide(current);
-            }, 4000); // 4 seconds per slide
-
-            // Parallax fade on scroll for active slide only
-            document.addEventListener('scroll', function() {
-                const hero = document.querySelector('section[aria-label="Hero"]');
-                if (!hero || !slides.length) return;
-                const rect = hero.getBoundingClientRect();
-                let progress = 1 - Math.max(0, rect.bottom) / (rect.height || 1);
-                progress = Math.max(0, Math.min(1, progress));
-                lastProgress = progress;
-                showSlide(current);
-            }, {
-                passive: true
-            });
-
-            // Initial show
-            showSlide(current);
-        });
-    </script>
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            // Animate hero title, subtext, and Franchise Now button uniformly
-            const heroEls = [
-                document.getElementById('hero-title'),
-                document.getElementById('hero-subtext'),
-                document.getElementById('franchise-btn')
-            ];
-            heroEls.forEach((el, i) => {
-                if (el) {
-                    setTimeout(() => {
-                        el.style.opacity = 1;
-                        el.style.animationPlayState = 'running';
-                    }, i * 150);
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray("section").forEach(section => {
+            gsap.from(section, {
+                opacity: 0,
+                y: 60,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 85%"
                 }
             });
         });
-    </script>
-    <script>
-        // Wait for DOM to be fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            const franchiseForm = document.getElementById('franchiseForm');
-            if (franchiseForm) {
-                franchiseForm.addEventListener('submit', function(e) {
-                    e.preventDefault(); // prevent normal form submit
 
-                    let form = this;
-                    let formData = new FormData(form);
-                    let alertDiv = document.getElementById('franchiseAlert');
+        // 3D Parallax Scroll + Mouse
+        const parallaxWrapper = document.querySelector('.parallax-wrapper');
+        const parallaxImg = document.querySelector('.parallax-img');
 
-                    console.log('Franchise form submitted');
-                    console.log('Alert div found:', alertDiv);
+        // Scroll parallax
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            parallaxImg.style.transform = `rotateY(${scrollY * 0.02}deg) translateZ(${scrollY * 0.04}px)`;
+        });
 
-                    fetch(form.action, {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
-                                'Accept': 'application/json',
-                                'X-Requested-With': 'XMLHttpRequest'
-                            },
-                            body: formData
-                        })
-                        .then(res => res.json())
-                        .then(data => {
-                            console.log('Response data:', data);
-                            if (data.success) {
-                                // Reset form first
-                                form.reset();
+        // Mouse 3D tilt
+        parallaxWrapper.addEventListener('mousemove', (e) => {
+            const rect = parallaxWrapper.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateY = (x - centerX) / centerX * 15; // max 15deg
+            const rotateX = -(y - centerY) / centerY * 15; // max 15deg
+            parallaxImg.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(50px)`;
+        });
 
-                                // Show alert and close modals after user clicks OK
-                                alert('Thank you for your franchise application! We will get back to you soon.');
-
-                                // Close both modals after alert is dismissed
-                                const signupModal = document.getElementById('signup-modal-form');
-                                const franchiseModal = document.getElementById('franchise-modal-form');
-                                if (signupModal) {
-                                    signupModal.classList.add('hidden');
-                                }
-                                if (franchiseModal) {
-                                    franchiseModal.classList.add('hidden');
-                                }
-
-                                // Re-enable body scroll
-                                document.body.style.overflow = 'auto';
-                                document.body.style.position = 'static';
-
-                                console.log('Franchise application submitted successfully');
-                            } else {
-                                alertDiv.innerHTML = `<div class="p-3 rounded bg-red-200 text-red-900">Something went wrong. Try again.</div>`;
-                            }
-                        })
-                        .catch(err => {
-                            console.error('Fetch error:', err);
-                            alertDiv.innerHTML = `<div class="p-3 rounded bg-red-200 text-red-900">Submission failed: ${err.message}</div>`;
-                        });
-                });
-            }
-
-            // Contact form submission
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault(); // prevent normal form submit
-
-                    let form = this;
-                    let formData = new FormData(form);
-                    let alertDiv = document.getElementById('contactAlert');
-
-                    fetch(form.action, {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
-                                'Accept': 'application/json',
-                                'X-Requested-With': 'XMLHttpRequest'
-                            },
-                            body: formData
-                        })
-                        .then(res => res.json())
-                        .then(data => {
-                            console.log('Contact response data:', data);
-                            if (data.success) {
-                                // Reset form first
-                                form.reset();
-
-                                // Show alert and close modals after user clicks OK
-                                alert('Thank you for contacting us! We will get back to you soon.');
-
-                                // Close all modals after alert is dismissed
-                                const contactModal = document.getElementById('contact-modal-form');
-                                const franchiseModal = document.getElementById('franchise-modal-form');
-                                const signupModal = document.getElementById('signup-modal-form');
-
-                                if (contactModal) {
-                                    contactModal.classList.add('hidden');
-                                }
-                                if (franchiseModal) {
-                                    franchiseModal.classList.add('hidden');
-                                }
-                                if (signupModal) {
-                                    signupModal.classList.add('hidden');
-                                }
-
-                                // Re-enable body scroll
-                                document.body.style.overflow = 'auto';
-                                document.body.style.position = 'static';
-
-                                console.log('Contact form submitted successfully');
-                            } else {
-                                alertDiv.innerHTML = `<div class="p-3 rounded bg-red-200 text-red-900">Something went wrong. Try again.</div>`;
-                            }
-                        })
-                        .catch(err => {
-                            console.error('Contact fetch error:', err);
-                            alertDiv.innerHTML = `<div class="p-3 rounded bg-red-200 text-red-900">Submission failed: ${err.message}</div>`;
-                        });
-                });
-            }
+        // Reset on mouse leave
+        parallaxWrapper.addEventListener('mouseleave', () => {
+            parallaxImg.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
         });
     </script>
-</body> 
+</body>
+
 </html>

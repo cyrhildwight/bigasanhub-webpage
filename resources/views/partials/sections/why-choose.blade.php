@@ -3,9 +3,9 @@
 <section class="relative overflow-hidden">
     <!-- Background -->
     <div class="absolute inset-0 bg-[#061a13]">
-        <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/40 via-cyan-900/20 to-emerald-800/40 animate-aurora opacity-90"></div>
-        <div id="bg-layer" class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-900/25 via-transparent to-cyan-900/30 will-change-transform"></div>
-        <div class="absolute top-1/2 left-1/2 w-[1600px] h-[1600px] -translate-x-1/2 -translate-y-1/2 animate-[spin_50s_linear_infinite] bg-[radial-gradient(circle,rgba(16,185,129,0.2)_0%,transparent_70%)] blur-3xl"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/40 via-green-900/20 to-emerald-800/40 animate-aurora opacity-90"></div>
+        <div id="bg-layer" class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-900/25 via-transparent to-green-900/30 will-change-transform"></div>
+        <div class="absolute top-1/2 left-1/2 w-[1600px] h-[1600px] -translate-x-1/2 -translate-y-1/2 animate-[spin_50s_linear_infinite] bg-[radial-gradient(circle,rgba(34,197,94,0.2)_0%,transparent_70%)] blur-3xl"></div>
         <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px), linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
         <canvas id="particle-canvas" class="absolute inset-0 w-full h-full"></canvas>
     </div>
@@ -16,7 +16,7 @@
         <div class="text-center mb-16">
             <span class="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_12px] shadow-amber-300/60 animate-ping"></span>
             <h2 class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-                Why Choose <span class="bg-gradient-to-r from-emerald-300 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">Bigasan Hub</span>
+                Why Choose <span class="bg-gradient-to-r from-emerald-300 via-green-400 to-lime-400 bg-clip-text text-transparent">Bigasan Hub</span>
             </h2>
             <p class="mt-5 max-w-[70ch] mx-auto text-lg text-emerald-100/70 leading-relaxed">
                 Reliable sourcing, transparent pricing, and a <span class="text-emerald-200 font-semibold">service-first team</span> focused on your needs—retail to wholesale.
@@ -71,7 +71,7 @@
 
             <!-- Center Visual -->
             <div class="lg:col-span-7 relative flex flex-col">
-                <div id="parallax-card" class="relative aspect-[16/10] rounded-3xl overflow-hidden border border-emerald-500/25 transition-transform duration-700 hover:scale-[1.05] hover:shadow-[0_0_55px_rgba(6,182,212,0.6)]">
+                <div id="parallax-card" class="relative aspect-[16/10] rounded-3xl overflow-hidden border border-emerald-500/25 transition-transform duration-700 hover:scale-[1.05] hover:shadow-[0_0_55px_rgba(34,197,94,0.6)]">
                     <img src="images/bigasan.jpg" alt="Rice supply & logistics" class="absolute inset-0 w-full h-[500px] object-cover opacity-100 mix-blend-luminosity will-change-transform">
                     <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
                         <div class="flex flex-wrap gap-3">
@@ -125,70 +125,102 @@
 
     /* Feature Card */
     .feature-card {
-        position: relative;
         display: flex;
-        gap: 1rem;
+        gap: 1.25rem;
         align-items: start;
-        padding: 1.75rem;
-        border-radius: 1rem;
-        background: rgba(6, 182, 212, 0.2);
-        border: 1px solid rgba(6, 182, 212, 0.3);
-        backdrop-filter: blur(6px);
-        transition: all .4s;
+        padding: 2rem;
+        border-radius: 1.25rem;
+        background: rgba(34, 197, 94, 0.12);
+        border: 1px solid rgba(34, 197, 94, 0.35);
+        backdrop-filter: blur(8px);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .feature-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(circle at top left, rgba(132, 204, 22, 0.25), transparent 70%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .feature-card:hover::before {
         opacity: 1;
     }
 
     .feature-card:hover {
         transform: translateY(-10px) scale(1.05);
-        box-shadow: 0 15px 45px rgba(6, 182, 212, 0.35);
-        border-color: rgba(6, 182, 212, 0.6);
+        box-shadow: 0 18px 55px rgba(34, 197, 94, 0.45);
+        border-color: rgba(132, 204, 22, 0.8);
     }
 
     .feature-card .icon {
         flex-shrink: 0;
         display: grid;
         place-items: center;
-        width: 3rem;
-        height: 3rem;
-        border-radius: .75rem;
-        background: linear-gradient(135deg, rgba(16, 185, 129, .3), rgba(6, 182, 212, .3));
-        color: #5eead4;
-        box-shadow: 0 0 18px rgba(6, 182, 212, .4);
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 1rem;
+        background: linear-gradient(135deg, rgba(34, 197, 94, .4), rgba(132, 204, 22, .3));
+        color: #bbf7d0;
+        box-shadow: 0 0 20px rgba(34, 197, 94, .6), inset 0 0 10px rgba(132, 204, 22, .25);
     }
 
     /* Chips */
     .chip {
-        padding: .4rem .9rem;
+        padding: .45rem 1rem;
         border-radius: 9999px;
         font-size: .85rem;
         color: #a7f3d0;
-        background: rgba(6, 182, 212, .15);
-        border: 1px solid rgba(6, 182, 212, .3);
-        backdrop-filter: blur(4px);
+        background: rgba(34, 197, 94, .18);
+        border: 1px solid rgba(34, 197, 94, .4);
+        backdrop-filter: blur(5px);
         transition: .3s;
     }
 
     .chip:hover {
-        background: rgba(6, 182, 212, .3);
+        background: rgba(34, 197, 94, .35);
         color: #fff;
-        box-shadow: 0 0 12px rgba(6, 182, 212, 0.5);
+        box-shadow: 0 0 15px rgba(34, 197, 94, 0.55);
     }
 
     /* Stats */
     .stat-card {
-        border-radius: 1rem;
-        background: linear-gradient(to br, rgba(16, 185, 129, .3), rgba(6, 95, 70, .3));
-        border: 1px solid rgba(6, 182, 212, .3);
-        padding: 1.25rem;
+        border-radius: 1.25rem;
+        background: linear-gradient(145deg, rgba(6, 95, 70, .55), rgba(34, 197, 94, .18));
+        border: 1px solid rgba(34, 197, 94, .35);
+        padding: 1.5rem 1rem;
         text-align: center;
         transition: transform .4s, box-shadow .4s;
+        position: relative;
+    }
+
+    .stat-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        border: 1px solid rgba(132, 204, 22, .25);
+        pointer-events: none;
     }
 
     .stat-card:hover {
-        transform: translateY(-6px) scale(1.05);
-        box-shadow: 0 14px 35px rgba(6, 182, 212, 0.3);
+        transform: translateY(-8px) scale(1.07);
+        box-shadow: 0 20px 50px rgba(34, 197, 94, .35);
+    }
+
+    .stat {
+        background: linear-gradient(to right, #86efac, #a3e635, #bef264);
+        -webkit-background-clip: text;
+        color: transparent;
+        font-weight: 800;
     }
 </style>
+
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

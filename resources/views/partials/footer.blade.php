@@ -5,7 +5,7 @@
             <!-- Company Info -->
             <div class="text-center md:text-left">
                 <div class="flex items-center justify-center md:justify-start mb-4">
-                    <img src="/images/logo.jpg" alt="Bigasan Hub logo" class="w-12 h-12 object-contain bg-white rounded-full shadow mr-3" />
+                    <img src="/images/logo.png" alt="Bigasan Hub logo" class="w-12 h-12 object-contain bg-white rounded-full shadow mr-3" />
                     <h3 class="text-xl font-bold text-white">Bigasan Hub</h3>
                 </div>
                 <p class="text-[#ffffff]/80 mb-4">Premier rice supplier for households, restaurants, and retailers across the Philippines.</p>

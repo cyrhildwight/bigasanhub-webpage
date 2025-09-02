@@ -6,9 +6,9 @@
     {{-- Hero Section --}}
     <section class="relative overflow-hidden">
         <!-- Background Layers -->
-        <div class="absolute inset-0 bg-[#061a13]">
-            <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/40 via-green-900/20 to-emerald-800/40 animate-aurora opacity-90"></div>
-            <div id="bg-layer-hero" class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-900/25 via-transparent to-green-900/30 will-change-transform"></div>
+        <div class="absolute inset-0 bg-[#04140f]">
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/40 via-green-900/20 to-emerald-800/40 animate-aurora opacity-80"></div>
+            <div id="bg-layer-choose" class="absolute inset-0 backdrop-blur-[2px] will-change-transform"></div>
             <canvas id="hero-particle-canvas" class="absolute inset-0 w-full h-full"></canvas>
         </div>
 
@@ -44,9 +44,9 @@
 
             <div class="grid md:grid-cols-3 gap-8">
                 {{-- Vision --}}
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="icon bg-gradient-to-tr from-emerald-400 to-lime-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <div class="relative flex items-start gap-4 p-7 rounded-xl bg-[rgba(16,94,60,0.25)] border border-emerald-500/25" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex-shrink-0 grid place-items-center w-13 h-13 rounded-lg text-white shadow-[0_0_18px_rgba(34,197,94,0.4)] bg-gradient-to-tr from-emerald-400 to-lime-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 .587l3.668 7.568L24 9.75l-6 5.857L19.335 24 12 19.897 4.665 24 6 15.607 0 9.75l8.332-1.595z" />
                         </svg>
                     </div>
@@ -59,9 +59,9 @@
                 </div>
 
                 {{-- Mission --}}
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="icon bg-gradient-to-tr from-green-400 to-emerald-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <div class="relative flex items-start gap-4 p-7 rounded-xl bg-[rgba(16,94,60,0.25)] border border-emerald-500/25" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex-shrink-0 grid place-items-center w-13 h-13 rounded-lg text-white shadow-[0_0_18px_rgba(34,197,94,0.4)] bg-gradient-to-tr from-green-400 to-emerald-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 12a5 5 0 100-10 5 5 0 000 10zM4 22c0-4 4-7 8-7s8 3 8 7v1H4v-1z" />
                         </svg>
                     </div>
@@ -74,9 +74,9 @@
                 </div>
 
                 {{-- Core Values --}}
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="icon bg-gradient-to-tr from-yellow-400 to-emerald-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <div class="relative flex items-start gap-4 p-7 rounded-xl bg-[rgba(16,94,60,0.25)] border border-emerald-500/25" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex-shrink-0 grid place-items-center w-13 h-13 rounded-lg text-white shadow-[0_0_18px_rgba(34,197,94,0.4)] bg-gradient-to-tr from-yellow-400 to-emerald-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M20.285 6.709l-11.39 11.39-5.59-5.59 1.414-1.415 4.176 4.176 9.976-9.976z" />
                         </svg>
                     </div>
@@ -108,7 +108,7 @@
             </h2>
             <div class="grid md:grid-cols-2 gap-8">
                 {{-- Features --}}
-                <div class="feature-card flex-col" data-aos="fade-right">
+                <div class="relative flex flex-col gap-4 p-7 rounded-xl bg-[rgba(16,94,60,0.25)] border border-emerald-500/25" data-aos="fade-right">
                     <h3 class="text-xl font-semibold text-white mb-4 border-b border-emerald-400 pb-2">Our Franchise Packages Include:</h3>
                     <ul class="space-y-3 text-emerald-100/80">
                         @forelse(($features ?? []) as $feature)
@@ -132,7 +132,7 @@
                 </div>
 
                 {{-- Target Market --}}
-                <div class="feature-card flex-col" data-aos="fade-left">
+                <div class="relative flex flex-col gap-4 p-7 rounded-xl bg-[rgba(16,94,60,0.25)] border border-emerald-500/25" data-aos="fade-left">
                     <h3 class="text-xl font-semibold text-white mb-4 border-b border-emerald-400 pb-2">Target Market</h3>
                     <ul class="space-y-3 text-emerald-100/80">
                         <li>Household Consumers</li>
@@ -186,13 +186,20 @@
     }
 
     // Particle System with breathing effect
-    function initParticles(canvasId, numParticles = 60, colors = { glow: "255,255,200", ellipse: "255,255,180" }) {
+    function initParticles(canvasId, numParticles = 60, colors = {
+        glow: "255,255,200",
+        ellipse: "255,255,180"
+    }) {
         const canvas = document.getElementById(canvasId);
         if (!canvas) return;
 
         const ctx = canvas.getContext("2d");
         let particles = [];
-        let mouse = { x: null, y: null, radius: 120 };
+        let mouse = {
+            x: null,
+            y: null,
+            radius: 120
+        };
         let animationId = null;
         let isRunning = false;
         let time = 0;
@@ -236,7 +243,8 @@
                 let size = p.baseSize * pulse;
 
                 if (mouse.x && mouse.y) {
-                    let dx = p.x - mouse.x, dy = p.y - mouse.y;
+                    let dx = p.x - mouse.x,
+                        dy = p.y - mouse.y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < mouse.radius) {
                         p.x += dx / dist * 2;
@@ -275,7 +283,9 @@
         }
 
         // GSAP ScrollTrigger: fade + start/stop
-        gsap.fromTo(canvas, { opacity: 0 }, {
+        gsap.fromTo(canvas, {
+            opacity: 0
+        }, {
             opacity: 1,
             duration: 1.2,
             ease: "power2.out",
@@ -292,9 +302,18 @@
     }
 
     // Init particles with emerald theme
-    initParticles("hero-particle-canvas", 70, { glow: "52,211,153", ellipse: "110,231,183" });
-    initParticles("vision-particle-canvas", 50, { glow: "132,204,22", ellipse: "163,230,53" });
-    initParticles("franchise-particle-canvas", 50, { glow: "202,138,4", ellipse: "250,204,21" });
+    initParticles("hero-particle-canvas", 70, {
+        glow: "52,211,153",
+        ellipse: "110,231,183"
+    });
+    initParticles("vision-particle-canvas", 50, {
+        glow: "132,204,22",
+        ellipse: "163,230,53"
+    });
+    initParticles("franchise-particle-canvas", 50, {
+        glow: "202,138,4",
+        ellipse: "250,204,21"
+    });
 
     // Parallax scroll for background layers
     ["bg-layer-hero", "bg-layer-vision", "bg-layer-franchise"].forEach(id => {
@@ -317,43 +336,22 @@
 <style>
     /* Aurora Animations */
     @keyframes aurora {
-        0% { background-position: 0% 50% }
-        50% { background-position: 100% 50% }
-        100% { background-position: 0% 50% }
+        0% {
+            background-position: 0% 50%
+        }
+
+        50% {
+            background-position: 100% 50%
+        }
+
+        100% {
+            background-position: 0% 50%
+        }
     }
+
     .animate-aurora {
         background-size: 200% 200%;
         animation: aurora 15s ease infinite;
-    }
-
-    /* Feature Card Styles */
-    .feature-card {
-        position: relative;
-        display: flex;
-        gap: 1rem;
-        align-items: start;
-        padding: 1.75rem;
-        border-radius: 1rem;
-        background: rgba(16, 94, 60, 0.25);
-        border: 1px solid rgba(34, 197, 94, 0.25);
-        backdrop-filter: blur(8px);
-        transition: all .4s ease;
-    }
-    .feature-card:hover {
-        transform: translateY(-8px) scale(1.03);
-        box-shadow: 0 20px 40px rgba(34, 197, 94, 0.35);
-        border-color: rgba(34, 197, 94, 0.6);
-    }
-    .feature-card .icon {
-        flex-shrink: 0;
-        display: grid;
-        place-items: center;
-        width: 3.25rem;
-        height: 3.25rem;
-        border-radius: .85rem;
-        color: white;
-        background: linear-gradient(135deg, #10b981, #65a30d);
-        box-shadow: 0 0 18px rgba(34, 197, 94, 0.4);
     }
 </style>
 @endsection

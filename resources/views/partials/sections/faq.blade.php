@@ -1,23 +1,40 @@
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-<section class="relative overflow-hidden">
-    <!-- Background -->
-    <div class="absolute inset-0 bg-[#061a13]">
-        <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/40 via-cyan-900/20 to-emerald-800/40 animate-aurora opacity-90"></div>
-        <div id="faq-bg-layer" class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-900/25 via-transparent to-cyan-900/30 will-change-transform"></div>
-        <div class="absolute top-1/2 left-1/2 w-[1600px] h-[1600px] -translate-x-1/2 -translate-y-1/2 animate-[spin_50s_linear_infinite] bg-[radial-gradient(circle,rgba(16,185,129,0.15)_0%,transparent_70%)] blur-3xl"></div>
-        <canvas id="faq-particle-canvas" class="absolute inset-0 w-full h-full"></canvas>
+<section class="relative py-28 bg-[#0a1a0c] overflow-hidden">
+    <!-- Aurora gradient waves -->
+    <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/40 via-green-800/20 to-emerald-900/40 animate-aurora" data-parallax data-speed="0.2"></div>
+
+    <!-- Radial glow effects -->
+    <div class="absolute top-1/3 left-1/2 w-[900px] h-[900px] bg-emerald-500/10 rounded-full blur-[200px]" data-parallax data-speed="0.1"></div>
+    <div class="absolute bottom-1/4 right-1/3 w-[600px] h-[600px] bg-lime-400/10 rounded-full blur-[160px]" data-parallax data-speed="0.15"></div>
+
+    <!-- Floating glowing shapes -->
+    <span class="absolute w-[650px] h-[650px] rounded-full bg-emerald-900/30 blur-3xl top-[-250px] left-[-200px] animate-float" data-parallax data-speed="0.25"></span>
+    <span class="absolute w-[500px] h-[500px] rounded-full bg-green-700/25 blur-3xl bottom-[-200px] right-[-160px] animate-float" data-parallax data-speed="0.2"></span>
+    <span class="absolute w-[300px] h-[300px] rounded-full bg-lime-500/15 blur-2xl top-[280px] right-[120px] animate-float" data-parallax data-speed="0.35"></span>
+    <span class="absolute w-[350px] h-[350px] rounded-full bg-emerald-500/10 blur-3xl bottom-[180px] left-[200px] animate-float" data-parallax data-speed="0.3"></span>
+
+    <!-- Starry particles -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <span class="absolute w-1.5 h-1.5 bg-lime-300/70 rounded-full blur-[2px] top-[20%] left-[30%] animate-float-slow"></span>
+        <span class="absolute w-2 h-2 bg-emerald-400/80 rounded-full blur-[2px] top-[60%] left-[75%] animate-float-slow"></span>
+        <span class="absolute w-1.5 h-1.5 bg-green-500/70 rounded-full blur-[2px] top-[40%] left-[55%] animate-float-slow"></span>
+        <span class="absolute w-2 h-2 bg-lime-400/60 rounded-full blur-[3px] top-[75%] left-[20%] animate-float-slow"></span>
+        <span class="absolute w-1 h-1 bg-white/50 rounded-full blur-[1px] top-[10%] left-[80%] animate-float-slow"></span>
+        <span class="absolute w-1 h-1 bg-emerald-300/50 rounded-full blur-[1px] top-[85%] left-[40%] animate-float-slow"></span>
     </div>
 
-    <!-- Content -->
-    <div class="relative z-10 mx-auto w-[92%] max-w-[1200px] py-24">
-        <!-- Header -->
-        <div class="text-center mb-16">
-            <h2 class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-                Frequently Asked <span class="bg-gradient-to-r from-emerald-300 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">Questions</span>
+    <!-- FAQ Content -->
+    <div class="relative z-10 mx-auto w-[92%] max-w-[1200px]">
+        <!-- Section Title -->
+        <div class="text-center mb-20">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-5 
+                bg-gradient-to-r from-lime-300 via-emerald-400 to-green-500 
+                bg-clip-text text-transparent"
+                data-aos="fade-down">
+                Frequently Asked Questions
             </h2>
-            <div class="mx-auto mt-2 h-1 w-24 rounded-full bg-gradient-to-r from-emerald-300 via-emerald-400 to-cyan-400 animate-pulse"></div>
-            <p class="mt-5 max-w-[70ch] mx-auto text-lg text-emerald-100/70 leading-relaxed">
+            <p class="text-lg text-gray-300/90 leading-relaxed max-w-[65ch] mx-auto" data-aos="fade-up">
                 Quick answers to common questions about supply, delivery, and pricing.
             </p>
         </div>
@@ -25,22 +42,29 @@
         <!-- FAQ Cards -->
         <div class="grid gap-6 md:grid-cols-2">
             @forelse(($faqs ?? []) as $faq)
-            <details class="group relative rounded-3xl bg-[#0b2f1c]/30 border border-[#10b981]/40 p-6 backdrop-blur-lg shadow-lg hover:shadow-[0_0_20px_rgba(16,185,129,0.6)] transition-all duration-400" data-aos="fade-up">
+            <details class="group relative rounded-3xl 
+                bg-gradient-to-br from-emerald-950/70 to-green-900/60 
+                border border-emerald-800/40 backdrop-blur-xl
+                shadow-[0_15px_40px_rgba(0,0,0,0.55)]
+                transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_25px_70px_rgba(0,0,0,0.6)] hover:border-lime-400/40
+                p-6" data-aos="fade-up">
+
                 <summary class="cursor-pointer font-semibold text-white text-lg flex justify-between items-center">
                     <span class="flex items-center gap-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-300 group-hover:animate-bounce" fill="currentColor" viewBox="0 0 24 24">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-lime-300 group-hover:animate-bounce" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 14.59l-3.29-3.3 1.42-1.41 1.87 1.88 3.88-3.88 1.41 1.41L13 16.59z" />
                         </svg>
                         {{ $faq->question }}
                     </span>
-                    <span class="ml-2 transition-transform duration-300 group-open:rotate-45 text-emerald-300 font-bold text-xl">+</span>
+                    <span class="ml-2 transition-transform duration-300 group-open:rotate-45 text-lime-300 font-bold text-xl">+</span>
                 </summary>
-                <div class="mt-4 text-white/80 leading-relaxed text-sm md:text-base transition-all duration-500 transform translate-y-[-5px] opacity-0 group-open:translate-y-0 group-open:opacity-100">
+
+                <div class="mt-4 text-gray-300 leading-relaxed text-sm md:text-base transition-all duration-500 transform translate-y-[-5px] opacity-0 group-open:translate-y-0 group-open:opacity-100">
                     {{ $faq->answer }}
                 </div>
             </details>
             @empty
-            <div class="col-span-full text-center text-white/50 py-8">
+            <div class="col-span-full text-center text-gray-400 py-8">
                 <p>No FAQs available yet.</p>
             </div>
             @endforelse
@@ -49,7 +73,37 @@
 </section>
 
 <style>
-    /* Aurora Animation */
+    @keyframes float {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        50% {
+            transform: translate(40px, -30px);
+        }
+
+        100% {
+            transform: translate(0, 0);
+        }
+    }
+
+    @keyframes float-slow {
+        0% {
+            transform: translateY(0);
+            opacity: 0.6;
+        }
+
+        50% {
+            transform: translateY(-25px);
+            opacity: 1;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 0.6;
+        }
+    }
+
     @keyframes aurora {
         0% {
             background-position: 0% 50%;
@@ -64,43 +118,23 @@
         }
     }
 
+    .animate-float {
+        animation: float 14s ease-in-out infinite;
+    }
+
+    .animate-float-slow {
+        animation: float-slow 12s ease-in-out infinite;
+    }
+
     .animate-aurora {
         background-size: 200% 200%;
-        animation: aurora 15s ease infinite;
+        animation: aurora 18s ease-in-out infinite;
     }
 
-    /* FAQ Card Open Animation */
-    details[open] summary~div {
-        animation: fadeExpand 0.5s ease forwards;
-    }
-
-    @keyframes fadeExpand {
-        0% {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
+    /* Remove default summary arrow */
     summary::-webkit-details-marker {
         display: none;
     }
-
-    /* Glow on hover */
-    details:hover {
-        box-shadow: 0 15px 40px rgba(16, 185, 129, 0.5), 0 0 25px rgba(16, 185, 129, 0.25) inset;
-    }
-
-    /* Plus icon rotation */
-    details[open] span:last-child {
-        transform: rotate(45deg);
-    }
-
-    /* Particle canvas handled in JS */
 </style>
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
@@ -111,47 +145,12 @@
         once: false
     });
 
-    // Particle canvas for FAQ section with uniform small particles
-    const faqCanvas = document.getElementById('faq-particle-canvas');
-    const faqCtx = faqCanvas.getContext('2d');
-    let faqParticles = [];
-    const numFaqParticles = 120; // denser, smaller, uniform
-
-    function resizeFaqCanvas() {
-        faqCanvas.width = window.innerWidth;
-        faqCanvas.height = window.innerHeight;
-    }
-    window.addEventListener("resize", resizeFaqCanvas);
-    resizeFaqCanvas();
-
-    for (let i = 0; i < numFaqParticles; i++) {
-        faqParticles.push({
-            x: Math.random() * faqCanvas.width,
-            y: Math.random() * faqCanvas.height,
-            size: 3, // uniform small size
-            speedX: (Math.random() - 0.5) * 0.3,
-            speedY: (Math.random() - 0.5) * 0.3,
-            opacity: Math.random() * 0.3 + 0.2
+    // Parallax scroll effect
+    document.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        document.querySelectorAll("[data-parallax]").forEach(el => {
+            const speed = parseFloat(el.getAttribute("data-speed"));
+            el.style.transform = `translateY(${scrollY * speed}px)`;
         });
-    }
-
-    function drawFaqParticles() {
-        faqCtx.clearRect(0, 0, faqCanvas.width, faqCanvas.height);
-        faqParticles.forEach(p => {
-            p.x += p.speedX;
-            p.y += p.speedY;
-            if (p.x < 0 || p.x > faqCanvas.width) p.speedX *= -1;
-            if (p.y < 0 || p.y > faqCanvas.height) p.speedY *= -1;
-
-            faqCtx.beginPath();
-            const gradient = faqCtx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 4);
-            gradient.addColorStop(0, `rgba(16,185,129,${p.opacity})`);
-            gradient.addColorStop(1, 'transparent');
-            faqCtx.fillStyle = gradient;
-            faqCtx.arc(p.x, p.y, p.size * 4, 0, Math.PI * 2);
-            faqCtx.fill();
-        });
-        requestAnimationFrame(drawFaqParticles);
-    }
-    drawFaqParticles();
+    });
 </script>

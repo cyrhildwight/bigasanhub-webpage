@@ -13,134 +13,17 @@
         rel="stylesheet">
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
-    <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
     @endif
 
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #0a1a0c;
-            color: #e5e7eb;
-        }
-
-        /* Buttons */
-        .btn-primary {
-            @apply px-8 py-4 rounded-full font-semibold transition-all duration-300;
-            background: linear-gradient(135deg, #14532d, #22c55e);
-            color: #fff;
-            box-shadow: 0 5px 20px rgba(22, 101, 52, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.6);
-        }
-
-        /* Hero shapes animation */
-        .hero-shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.15;
-            animation: float 30s infinite linear;
-        }
-
-        .shape1 {
-            width: 550px;
-            height: 550px;
-            background: #14532d;
-            top: -150px;
-            left: -180px;
-        }
-
-        .shape2 {
-            width: 400px;
-            height: 400px;
-            background: #22c55e;
-            bottom: -140px;
-            right: -120px;
-        }
-
-        .shape3 {
-            width: 250px;
-            height: 250px;
-            background: #16a34a;
-            top: 240px;
-            right: -60px;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translate(0, 0);
-            }
-
-            50% {
-                transform: translate(50px, -50px);
-            }
-
-            100% {
-                transform: translate(0, 0);
-            }
-        }
-
-        /* Hero Section */
-        .perspective {
-            perspective: 1200px;
-        }
-
-        .parallax-wrapper {
-            transform-style: preserve-3d;
-            will-change: transform;
-            transition: transform 0.1s ease-out;
-        }
-
-        .parallax-img {
-            width: 100%;
-            border-radius: 1rem;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-            transform: translateZ(0px);
-            transition: transform 0.1s ease-out;
-        }
-
-        /* Highlight cards */
-        .highlight-card {
-            background: rgba(20, 50, 30, 0.75);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(34, 197, 94, 0.25);
-        }
-
-        /* Section divider */
-        .section-divider svg {
-            display: block;
-            width: 100%;
-            height: 80px;
-        }
-
-        .fill-darkgreen {
-            fill: #0a1a0c;
-        }
-
-        h2.section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #d9f99d;
-            margin-bottom: 1rem;
-        }
-
-        p.section-subtitle {
-            font-size: 1.125rem;
-            color: #c7d8b6;
-            margin-bottom: 2rem;
-        }
-    </style>
 </head>
 
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden font-[Poppins,sans-serif] bg-[#0a1a0c] text-gray-200">
 
     @include('partials.header')
 
@@ -150,9 +33,9 @@
         <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/90 via-black/70 to-green-900/60 z-0"></div>
 
         <!-- Floating shapes -->
-        <span class="hero-shape shape1"></span>
-        <span class="hero-shape shape2"></span>
-        <span class="hero-shape shape3"></span>
+        <span class="absolute rounded-full opacity-15 animate-float w-[550px] h-[550px] bg-[#14532d] top-[-150px] left-[-180px]"></span>
+        <span class="absolute rounded-full opacity-15 animate-float w-[400px] h-[400px] bg-[#22c55e] bottom-[-140px] right-[-120px]"></span>
+        <span class="absolute rounded-full opacity-15 animate-float w-[250px] h-[250px] bg-[#16a34a] top-[240px] right-[-60px]"></span>
 
         <!-- Content: Left text + Right image -->
         <div class="relative z-10 w-full flex flex-col md:flex-row items-center gap-12">
@@ -171,14 +54,30 @@
             </div>
 
             <!-- Right: Image with scroll & mouse 3D parallax -->
-            <div class="md:w-1/2 perspective" data-aos="fade-left">
-                <div class="parallax-wrapper">
+            <div class="md:w-1/2 [perspective:1200px]" data-aos="fade-left">
+                <div class="parallax-wrapper [transform-style:preserve-3d] will-change-transform transition-transform duration-100">
                     <img src="/images/bigasan.jpg" alt="Premium Rice"
-                        class="parallax-img">
+                        class="parallax-img w-full rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] transform-gpu transition-transform duration-100">
                 </div>
             </div>
         </div>
     </section>
+<style>
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(50px, -50px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+    </style>
 
     <!-- Dynamic Sections -->
     <main>

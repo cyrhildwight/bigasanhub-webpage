@@ -86,8 +86,13 @@
         @include('partials.sections.explore-more')
         @include('partials.sections.contact')
         @include('partials.sections.faq')
+         <button type="button" data-open-modal="contact-modal-form" class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#2E6F40] text-[#ffffff] font-bold shadow-lg hover:bg-[#0d2e1a] hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#0d2e1a] transition-all duration-300" aria-label="Contact Bigasan Hub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 5a3 3 0 0 1 3-3h2a1 1 0 0 1 1 1v3a1 1 0 0 1-.553.894l-1.447.724a10.97 10.97 0 0 0 4.382 4.382l.724-1.447A1 1 0 0 1 13 10h3a1 1 0 0 1 1 1v2a3 3 0 0 1-3 3h-1a11 11 0 0 1-11-11V5Z"/></svg>
+            <span>Contact Us</span>
+        </button>
     </main>
 
+    
     <footer class="text-[#ffffff] py-12 bg-[#1a4a2a] border-t border-[#0d2e1a]">
         <div class="mx-auto w-[92%] max-w-[1200px]">
             <!-- Main Footer Content -->
